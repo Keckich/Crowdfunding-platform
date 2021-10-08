@@ -1,0 +1,10 @@
+﻿.single-unit {
+    margin-bottom: 50px;
+}
+.inside-container {
+    padding: 0 15px 0 23%;
+}
+.unit-img {
+    border: 2px solid;
+    border-radius: 8px;
+}

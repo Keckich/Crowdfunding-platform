@@ -1,7 +1,8 @@
-﻿@{
+﻿@model Сrowdfunding.Models.ViewModels.IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<article class="text-center">
-
+<article class="row">
+    @await Html.PartialAsync("~/Views/Home/CampaignList.cshtml", Model.Campaigns)
 </article>
