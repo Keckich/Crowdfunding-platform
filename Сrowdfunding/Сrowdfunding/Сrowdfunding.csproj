@@ -13,6 +13,10 @@
     <Compile Remove="Data\Migrations\20210501015020_Campaign-first.Designer.cs" />
     <Compile Remove="Data\Migrations\20210501025206_Category1.cs" />
     <Compile Remove="Data\Migrations\20210501025206_Category1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210506023101_Comment1.cs" />
+    <Compile Remove="Data\Migrations\20210506023101_Comment1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210506041015_Comment2.cs" />
+    <Compile Remove="Data\Migrations\20210506041015_Comment2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

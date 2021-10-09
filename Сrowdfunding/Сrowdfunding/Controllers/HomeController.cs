@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,15 +17,17 @@ namespace Сrowdfunding.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _context;
+        private UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var campaigns = _context.Campaigns.ToList();
             var indexVm = new IndexViewModel
@@ -31,6 +35,39 @@ namespace Сrowdfunding.Controllers
                 Campaigns = campaigns
             };
             return View(indexVm);
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var commentVm = new CommentViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Comments = _context.Comments.ToList()
+            };
+            return View(commentVm);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(Comment comment, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.PostDate = DateTime.Now;
+                comment.Author = _userManager.GetUserName(this.User);
+                _logger.LogInformation(comment.CampaignId.ToString());
+                _context.Add(comment);
+                _context.SaveChanges();
+
+                var commentVm = new CommentViewModel
+                {
+                    Campaign = _context.Campaigns.Find(id),
+                    Comments = _context.Comments.ToList()
+                };
+                return View("Details", commentVm);
+            }
+            return View();
         }
 
         public IActionResult Privacy()

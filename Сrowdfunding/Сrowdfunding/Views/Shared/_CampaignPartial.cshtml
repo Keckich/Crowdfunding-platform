@@ -7,7 +7,11 @@
             <img  height="150" style="width: 100%" src="" />
         </div>
         <div class="text-left">
-            <b>@Model.Name</b>
+            <b>
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.Id">
+                    @Model.Name
+                </a>                
+            </b>
             <p>@Model.Author</p>
             <div>Goal: @Model.TotalSum$</div>
             <div>Start: @Model.BeginTime</div>
