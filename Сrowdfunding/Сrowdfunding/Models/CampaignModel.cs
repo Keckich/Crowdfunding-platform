@@ -18,5 +18,6 @@ namespace Сrowdfunding.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Reward> Rewards { get; set; }
     }
 }

@@ -1,10 +1,12 @@
-﻿@model Сrowdfunding.Models.ViewModels.CommentViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@model Сrowdfunding.Models.ViewModels.CommentViewModel
 @{
 }
 <article>
     <section class="row justify-content-between">
         <div class="col-12 col-md-6 unit-img">
-            <img height="250" src=""/>
+            <img height="250" src="" />
         </div>
         <div class="col-12 col-md-6">
             <h2>@Model.Campaign.Name</h2>
@@ -13,13 +15,24 @@
                 @Model.Campaign.Author
             </div>
             <b>Goal: @Model.Campaign.TotalSum</b>
+            <div>
+                <form method="get" asp-controller="Home" asp-action="Support" asp-route-id="@Model.Campaign.Id">
+                    <button>Support</button>
+                </form>
+                @if (UserManager.GetUserAsync(User).Result != null && UserManager.GetUserAsync(User).Result.UserName == Model.Campaign.Author)
+                {
+                    <form method="get" asp-controller="Home" asp-action="Rewards" asp-route-id="@Model.Campaign.Id">
+                        <button>Add rewards</button>
+                    </form>
+                }
+            </div>
+
         </div>
-        
+
     </section>
     <nav>
         <hr />
         <form method="get">
-
         </form>
         <hr />
     </nav>

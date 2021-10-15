@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Сrowdfunding.Data;
 
 namespace Сrowdfunding.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507023343_Reward1")]
+    partial class Reward1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,8 +310,8 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<int>("CampaignId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                    b.Property<string>("Count")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Delivery")
                         .HasColumnType("nvarchar(max)");

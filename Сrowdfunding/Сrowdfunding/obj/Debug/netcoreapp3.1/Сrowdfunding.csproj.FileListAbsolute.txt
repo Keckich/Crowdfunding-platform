@@ -447,3 +447,7 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\V
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Home\CommentList.cshtml.g.cs
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CommentPartial.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Home\Rewards.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Home\RewardList.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Home\Support.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RewardPartial.cshtml.g.cs

@@ -70,6 +70,39 @@ namespace Сrowdfunding.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Rewards(int id)
+        {
+            var campaign = _context.Campaigns.Find(id);
+            return View(campaign);
+        }
+
+        [HttpPost]
+        public IActionResult Rewards(Reward reward)
+        {
+            _context.Add(reward);
+            _context.SaveChanges();
+            var commentVm = new CommentViewModel
+            {
+                Campaign = _context.Campaigns.Find(reward.CampaignId),
+                Comments = _context.Comments.ToList()
+            };
+            return View("Details", commentVm);
+        }
+
+        [HttpGet]
+        public IActionResult Support(int id)
+        {
+            var supportVm = new SupportViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Rewards = _context.Rewards.ToList()
+            };
+            
+            return View(supportVm);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();

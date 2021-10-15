@@ -110,8 +110,17 @@ namespace Сrowdfunding
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "reward",
+                    pattern: "Home/Details/{id}/AddRewards",
+                    defaults: new { controller = "Home", action = "Rewards"});
+                endpoints.MapControllerRoute(
+                    name: "support",
+                    pattern: "Home/Details/{id}/Support",
+                    defaults: new { controller = "Home", action = "Support" });
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
                 endpoints.MapRazorPages();
             });
         }
