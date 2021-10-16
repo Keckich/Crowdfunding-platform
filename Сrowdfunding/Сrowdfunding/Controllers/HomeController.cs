@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Сrowdfunding.Data;
+using Сrowdfunding.Hubs;
 using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;
 
@@ -18,12 +20,14 @@ namespace Сrowdfunding.Controllers
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
+        private readonly IHubContext<CommentHub> _commentHub;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, IHubContext<CommentHub> commentHub)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
+            _commentHub = commentHub;
         }
 
 
@@ -35,6 +39,13 @@ namespace Сrowdfunding.Controllers
                 Campaigns = campaigns
             };
             return View(indexVm);
+        }
+
+        [HttpGet]
+        public IActionResult GetComments()
+        {
+            var res = _context.Comments.ToList();
+            return Ok(res);
         }
 
         [HttpGet]
@@ -55,7 +66,7 @@ namespace Сrowdfunding.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Details(Comment comment, int id)
+        public async Task<IActionResult> DetailsAsync(Comment comment, int id)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +76,7 @@ namespace Сrowdfunding.Controllers
                 _logger.LogInformation(comment.CampaignId.ToString());
                 _context.Add(comment);
                 _context.SaveChanges();
+                await _commentHub.Clients.All.SendAsync("LoadComments");
                 var campaign = _context.Campaigns.Find(id);
                 var commentVm = new CommentViewModel
                 {

@@ -49,12 +49,13 @@
         </form>
         <hr />
     </nav>
-    <section>
+    <section id="commentSection">
         <form method="post" asp-action="Details" asp-controller="Home">
             <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />
             <textarea class="form-control" name="Content"></textarea>
             <input type="submit" value="Submit" />
         </form>
-        @await Html.PartialAsync("~/Views/Home/CommentList.cshtml", Model)
+        <div id="comments"></div>
+        @*@await Html.PartialAsync("~/Views/Home/CommentList.cshtml", Model)*@
     </section>
 </article>

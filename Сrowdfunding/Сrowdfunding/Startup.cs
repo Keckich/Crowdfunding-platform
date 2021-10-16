@@ -20,6 +20,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using Сrowdfunding.CloudStorage;
 using Сrowdfunding.Models;
+using Сrowdfunding.Hubs;
 
 namespace Сrowdfunding
 {
@@ -93,6 +94,7 @@ namespace Сrowdfunding
                     }); ;
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
             services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 
@@ -132,7 +134,7 @@ namespace Сrowdfunding
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                
+                endpoints.MapHub<CommentHub>("/CommentHub");
                 endpoints.MapRazorPages();
             });
         }
