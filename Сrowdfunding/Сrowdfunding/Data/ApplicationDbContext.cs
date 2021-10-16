@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,16 @@ namespace Сrowdfunding.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Reward> Rewards { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Campaign>().HasOne(camp => camp.Category).WithMany(cat => cat.Campaigns).HasForeignKey(camp => camp.CategoryId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Comments).WithOne(comm => comm.Campaign).HasForeignKey(comm => comm.CampaignId).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Campaign>().HasMany(camp => camp.Rewards).WithOne(rev => rev.Campaign).HasForeignKey(rev => rev.CampaignId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Campaign>().HasMany(camp => camp.Rewards).WithOne(rew => rew.Campaign).HasForeignKey(rew => rew.CampaignId).OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Ratings).WithOne(r => r.User).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Campaign>().HasMany(camp => camp.Ratings).WithOne(r => r.Campaign).HasForeignKey(r => r.CampaignId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

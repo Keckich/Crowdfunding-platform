@@ -18,6 +18,8 @@ using System.Security.Claims;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using Сrowdfunding.CloudStorage;
+using Сrowdfunding.Models;
 
 namespace Сrowdfunding
 {
@@ -48,8 +50,16 @@ namespace Сrowdfunding
             services.AddAuthentication()
                     .AddGoogle(options =>
                     {
+                        IConfigurationSection googleAuthNSection =
+                             Configuration.GetSection("Authentication:Google");
                         options.ClientId = "102145220985-utd9mhqgbamgu1tjiutlquis49t125bg.apps.googleusercontent.com";
                         options.ClientSecret = "o3paVzEAy8VRqH0RF0d8UKPt";
+                    })
+                    .AddTwitter(options =>
+                    {
+                        options.ConsumerKey = "9iGXRjBEfQ5v96uypzvKukgQ1";
+                        options.ConsumerSecret = "TWiFCyDQh1pGqtoNruWW4tUcaVnDQ9cgJkSqmRlVIB3m34jOGA";
+                        options.RetrieveUserDetails = true;
                     })
                     .AddOAuth("GitHub", "GitHub", options => {
                         options.ClientId = "3f2f88bcde7f5e148a0a";
@@ -83,6 +93,7 @@ namespace Сrowdfunding
                     }); ;
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +128,7 @@ namespace Сrowdfunding
                     name: "support",
                     pattern: "Home/Details/{id}/Support",
                     defaults: new { controller = "Home", action = "Support" });
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

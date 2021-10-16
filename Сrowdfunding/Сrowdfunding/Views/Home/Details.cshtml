@@ -6,15 +6,28 @@
 <article>
     <section class="row justify-content-between">
         <div class="col-12 col-md-6 unit-img">
-            <img height="250" src="" />
+            <img height="250" src="@Url.Content(Model.Campaign.ImageUrl)" />
         </div>
         <div class="col-12 col-md-6">
-            <h2>@Model.Campaign.Name</h2>
+            <div id="detail-title" style="display: flex" class="justify-content-between">
+                <h2>@Model.Campaign.Name</h2>
+                <div id="rate-form">
+                    @await Html.PartialAsync("_RatingPartial", Model.Rating)
+                </div>
+
+            </div>
+                
             <p>@Model.Campaign.ShortDescription</p>
             <div>
                 @Model.Campaign.Author
             </div>
-            <b>Goal: @Model.Campaign.TotalSum</b>
+            <div>
+                <b>Goal: @Model.Campaign.TotalSum$</b>
+            </div>
+            <div>
+                <b>Remain @Model.Campaign.RemainSum$</b>
+            </div>
+
             <div>
                 <form method="get" asp-controller="Home" asp-action="Support" asp-route-id="@Model.Campaign.Id">
                     <button>Support</button>

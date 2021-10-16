@@ -9,5 +9,6 @@ namespace Сrowdfunding.Models.ViewModels
     {
         public Campaign Campaign { get; set; }
         public List<Comment> Comments { get; set; }
+        public Rating Rating { get; set; }
     }
 }

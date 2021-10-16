@@ -162,12 +162,10 @@ namespace Сrowdfunding.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -204,12 +202,10 @@ namespace Сrowdfunding.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -238,8 +234,17 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageStorageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RemainSum")
+                        .HasColumnType("int");
 
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
@@ -296,6 +301,29 @@ namespace Сrowdfunding.Data.Migrations
                     b.HasIndex("CampaignId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Rating", b =>
+                {
+                    b.Property<int>("RateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CampaignId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RateId");
+
+                    b.HasIndex("CampaignId");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Сrowdfunding.Models.Reward", b =>
@@ -393,6 +421,15 @@ namespace Сrowdfunding.Data.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Rating", b =>
+                {
+                    b.HasOne("Сrowdfunding.Models.Campaign", "Campaign")
+                        .WithMany("Ratings")
+                        .HasForeignKey("CampaignId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

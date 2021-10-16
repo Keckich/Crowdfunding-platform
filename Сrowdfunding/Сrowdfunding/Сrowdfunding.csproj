@@ -17,10 +17,25 @@
     <Compile Remove="Data\Migrations\20210506023101_Comment1.Designer.cs" />
     <Compile Remove="Data\Migrations\20210506041015_Comment2.cs" />
     <Compile Remove="Data\Migrations\20210506041015_Comment2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210508011149_test.cs" />
+    <Compile Remove="Data\Migrations\20210508011149_test.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210514195829_Rating1.cs" />
+    <Compile Remove="Data\Migrations\20210514195829_Rating1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210515001717_AppUser1.cs" />
+    <Compile Remove="Data\Migrations\20210515001717_AppUser1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210515003939_User2.cs" />
+    <Compile Remove="Data\Migrations\20210515003939_User2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210515004537_User3.cs" />
+    <Compile Remove="Data\Migrations\20210515004537_User3.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210515004633_User3.cs" />
+    <Compile Remove="Data\Migrations\20210515004633_User3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="3.4.0" />
+    <PackageReference Include="jQuery.Ajax.Unobtrusive" Version="2.0.20710" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.13" />
@@ -30,6 +45,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 

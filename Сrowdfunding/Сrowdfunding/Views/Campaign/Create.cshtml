@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Сrowdfunding.Models.Category>
+﻿@*@model IEnumerable<Сrowdfunding.Models.Category>*@
+@model Сrowdfunding.Models.ViewModels.CreateCampaignViewModel
 @{
 }
 <script type="text/javascript" src="~/js/pagedown/jquery.pagedown-bootstrap.combined.min.js"></script>
@@ -10,11 +11,11 @@
     })();
 </script>
 <section class="m-auto" style="width: 70%">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Category:</label>
             <select name="CategoryId">
-                @foreach (var category in Model)
+                @foreach (var category in Model.Categories)
                 {
                     <option value="@category.Id">@category.Name</option>
                 }
@@ -36,6 +37,11 @@
             <label>Time:</label>
             <input type="date" class="form-control" name="EndTime" />
         </div>
+        @*<div>
+            <label>Image File:</label>
+            <input type="file" name="ImageFile" class="form-control" />
+            <span asp-validation-for="@Model.Campaign.ImageFile" class="text-danger"></span>
+        </div>*@
         <div class="form-group">
             <label>Story:</label>
             <div id="wmd-button-bar-0" class="wmd-button-bar">

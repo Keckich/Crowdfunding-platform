@@ -40,10 +40,15 @@ namespace Сrowdfunding.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+            
             var commentVm = new CommentViewModel
             {
                 Campaign = _context.Campaigns.Find(id),
-                Comments = _context.Comments.ToList()
+                Comments = _context.Comments.ToList(),
+                Rating = new Rating
+                {
+                    CampaignId = id
+                }
             };
             return View(commentVm);
         }
@@ -54,16 +59,21 @@ namespace Сrowdfunding.Controllers
         {
             if (ModelState.IsValid)
             {
+                var username = _userManager.GetUserName(this.User);
                 comment.PostDate = DateTime.Now;
-                comment.Author = _userManager.GetUserName(this.User);
+                comment.Author = username;
                 _logger.LogInformation(comment.CampaignId.ToString());
                 _context.Add(comment);
                 _context.SaveChanges();
-
+                var campaign = _context.Campaigns.Find(id);
                 var commentVm = new CommentViewModel
                 {
-                    Campaign = _context.Campaigns.Find(id),
-                    Comments = _context.Comments.ToList()
+                    Campaign = campaign,
+                    Comments = _context.Comments.ToList(),
+                    Rating = new Rating
+                    {
+                        CampaignId = id
+                    }
                 };
                 return View("Details", commentVm);
             }
@@ -82,10 +92,16 @@ namespace Сrowdfunding.Controllers
         {
             _context.Add(reward);
             _context.SaveChanges();
+            var username = _userManager.GetUserName(this.User);
             var commentVm = new CommentViewModel
             {
                 Campaign = _context.Campaigns.Find(reward.CampaignId),
-                Comments = _context.Comments.ToList()
+                Comments = _context.Comments.ToList(),
+                Rating = new Rating
+                {
+                    CampaignId = reward.CampaignId,
+                    Username = username
+                }
             };
             return View("Details", commentVm);
         }
@@ -102,6 +118,44 @@ namespace Сrowdfunding.Controllers
             return View(supportVm);
         }
 
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Rate(Rating rating)
+        {
+            //_logger.LogError("rating:" + rating.ToString());
+            var username = _userManager.GetUserName(this.User);
+            var ratings = _context.Ratings.Where(rate => rate.Username == username && rate.CampaignId == rating.CampaignId).ToList();
+            if (ratings.Count() == 0)
+            {
+                rating.Username = username;
+                _context.Add(rating);     
+                _context.SaveChanges();
+            }
+            return RedirectToAction("_RatingPartial", new { id = rating.RateId });
+        }
+
+        public PartialViewResult _RatingPartial(int id)
+        {
+            return PartialView(_context.Ratings.Find(id));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Support(Reward reward, int id)
+        {
+            var campaign = _context.Campaigns.Find(id);
+            var rew = _context.Rewards.Find(reward.RewardId);
+            campaign.RemainSum -= reward.Price;
+            rew.Count--;
+            _context.SaveChanges();
+            var supportVm = new SupportViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Rewards = _context.Rewards.ToList()
+            };
+            return View(supportVm);
+        }
 
         public IActionResult Privacy()
         {
