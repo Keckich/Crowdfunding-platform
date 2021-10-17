@@ -9,4 +9,23 @@
     <div>
         @Model.Content
     </div>
+    <form class="d-inline-block" method="post" action="/Home/Like"
+          data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
+        <input type="hidden" name="CommentId" value="@Model.CommentId" />
+        <input type="hidden" name="CampaignId" value="@Model.CampaignId" />
+        <span>@Model.LikesCount</span>
+        <button class="like-btn">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        </button>
+    </form>
+    <form class="d-inline-block" method="post" action="/Home/Dislike"
+          data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
+        <input type="hidden" name="CommentId" value="@Model.CommentId" />
+        <input type="hidden" name="CampaignId" value="@Model.CampaignId" />
+        <span>@Model.DislikesCount</span>
+        <button class="like-btn">
+            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+        </button>
+    </form>
+    <hr />
 </div>

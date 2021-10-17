@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0LSy+egWcT1URDDVRzgvYex6iFyRs8MqC32FAtrGcZCcQ2KkA4kpZcx/saOX5DtMiz9YNzecthfNZU7NUKTLtw==",
+  "dgSpecHash": "C+ppgnGRL4lVyl0F+b/98K+rbRfs7RYzhVY+YiGGJWz5nYGF4dAP7HYs8OorbR9pl4DsjF9YS/fZWPWYo0NSDg==",
   "success": true,
   "projectFilePath": "D:\\Itra-crowdfunding\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
   "expectedPackageFiles": [
@@ -78,6 +78,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\3.1.5\\microsoft.visualstudio.web.codegenerators.mvc.3.1.5.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\moment.js\\2.29.1\\moment.js.2.29.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",

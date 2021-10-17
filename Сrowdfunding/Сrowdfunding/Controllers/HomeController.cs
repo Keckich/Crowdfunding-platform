@@ -51,7 +51,7 @@ namespace Сrowdfunding.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            
+            _logger.LogInformation(DateTime.Now.ToString("dd.MM.yyyy, HH:mm:ss"));
             var commentVm = new CommentViewModel
             {
                 Campaign = _context.Campaigns.Find(id),
@@ -68,8 +68,10 @@ namespace Сrowdfunding.Controllers
         [Authorize]
         public async Task<IActionResult> DetailsAsync(Comment comment, int id)
         {
+
             if (ModelState.IsValid)
             {
+                _logger.LogError("IN DETAILS");
                 var username = _userManager.GetUserName(this.User);
                 comment.PostDate = DateTime.Now;
                 comment.Author = username;
@@ -77,19 +79,25 @@ namespace Сrowdfunding.Controllers
                 _context.Add(comment);
                 _context.SaveChanges();
                 await _commentHub.Clients.All.SendAsync("LoadComments");
-                var campaign = _context.Campaigns.Find(id);
-                var commentVm = new CommentViewModel
-                {
-                    Campaign = campaign,
-                    Comments = _context.Comments.ToList(),
-                    Rating = new Rating
-                    {
-                        CampaignId = id
-                    }
-                };
-                return View("Details", commentVm);
+                
+                //return View("Details", commentVm);
+                return RedirectToAction("CommentList", new { id = id });
             }
             return View();
+        }
+
+        public PartialViewResult CommentList(int id)
+        {
+            var commentVm = new CommentViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Comments = _context.Comments.ToList(),
+                Rating = new Rating
+                {
+                    CampaignId = id
+                }
+            };
+            return PartialView(commentVm);
         }
 
         [HttpGet]
@@ -130,28 +138,6 @@ namespace Сrowdfunding.Controllers
             return View(supportVm);
         }
 
-
-        [HttpPost]
-        [Authorize]
-        public IActionResult Rate(Rating rating)
-        {
-            //_logger.LogError("rating:" + rating.ToString());
-            var username = _userManager.GetUserName(this.User);
-            var ratings = _context.Ratings.Where(rate => rate.Username == username && rate.CampaignId == rating.CampaignId).ToList();
-            if (ratings.Count() == 0)
-            {
-                rating.Username = username;
-                _context.Add(rating);     
-                _context.SaveChanges();
-            }
-            return RedirectToAction("_RatingPartial", new { id = rating.RateId });
-        }
-
-        public PartialViewResult _RatingPartial(int id)
-        {
-            return PartialView(_context.Ratings.Find(id));
-        }
-
         [HttpPost]
         [Authorize]
         public IActionResult Support(Reward reward, int id)
@@ -168,6 +154,115 @@ namespace Сrowdfunding.Controllers
             };
             return View(supportVm);
         }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Rate(Rating rating)
+        {
+            //_logger.LogError("rating:" + rating.ToString());
+            var username = _userManager.GetUserName(this.User);
+            var ratings = _context.Ratings.Where(rate => rate.Username == username && rate.CampaignId == rating.CampaignId).ToList();
+            if (ratings.Count() == 0)
+            {
+                rating.Username = username;
+                _context.Add(rating);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("_RatingPartial", new { id = rating.RateId });
+        }
+
+        public PartialViewResult _RatingPartial(int id)
+        {
+            return PartialView(_context.Ratings.Find(id));
+        }
+
+        [Authorize]
+        public IActionResult Like(Comment comment)
+        {
+            _logger.LogError("like:" + comment.CommentId.ToString() + "; " + comment.CampaignId.ToString());
+            var username = _userManager.GetUserName(this.User);
+            var dbComment = _context.Comments.Find(comment.CommentId);
+            var newLike = new Like
+            {
+                CommentId = comment.CommentId,
+                Username = username
+            };
+            if (_context.Likes
+                .Where(like => like.CommentId == comment.CommentId)
+                .Where(like => like.Username == username)
+                .Any())
+            {
+                var like = _context.Likes
+                   .Where(l => l.CommentId == comment.CommentId)
+                   .Where(l => l.Username == username)
+                   .FirstOrDefault();
+                _context.Likes.Remove(like);
+                dbComment.LikesCount--;
+            }
+            else
+            {
+                if (_context.Dislikes
+                    .Where(dislike => dislike.CommentId == comment.CommentId)
+                    .Where(dislike => dislike.Username == username)
+                    .Any())
+                {
+                    var dislike = _context.Dislikes
+                       .Where(d => d.CommentId == comment.CommentId)
+                       .Where(d => d.Username == username)
+                       .FirstOrDefault();
+                    _context.Dislikes.Remove(dislike);
+                    dbComment.DislikesCount--;
+                }
+                _context.Likes.Add(newLike);
+                dbComment.LikesCount++;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("CommentList", new { id = comment.CampaignId });
+        }
+
+        [Authorize]
+        public IActionResult Dislike(Comment comment)
+        {
+            var username = _userManager.GetUserName(this.User);
+            var dbComment = _context.Comments.Find(comment.CommentId);
+            var newDislike = new Dislike
+            {
+                CommentId = comment.CommentId,
+                Username = username
+            };
+            if (_context.Dislikes
+                .Where(dislike => dislike.CommentId == comment.CommentId)
+                .Where(dislike => dislike.Username == username)
+                .Any())
+            {
+                var dislike = _context.Dislikes
+                   .Where(d => d.CommentId == comment.CommentId)
+                   .Where(d => d.Username == username)
+                   .FirstOrDefault();
+                _context.Dislikes.Remove(dislike);
+                dbComment.DislikesCount--;
+            }
+            else
+            {
+                if (_context.Likes
+                    .Where(like => like.CommentId == comment.CommentId)
+                    .Where(like => like.Username == username)
+                    .Any())
+                {
+                    var like = _context.Likes
+                       .Where(l => l.CommentId == comment.CommentId)
+                       .Where(l => l.Username == username)
+                       .FirstOrDefault();
+                    _context.Likes.Remove(like);
+                    dbComment.LikesCount--;
+                }
+                _context.Dislikes.Add(newDislike);
+                dbComment.DislikesCount++;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("CommentList", new { id = comment.CampaignId });
+        }
+
 
         public IActionResult Privacy()
         {

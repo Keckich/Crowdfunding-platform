@@ -50,7 +50,8 @@
         <hr />
     </nav>
     <section id="commentSection">
-        <form method="post" asp-action="Details" asp-controller="Home">
+        <form method="post" asp-action="Details" asp-controller="Home"
+              data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
             <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />
             <textarea class="form-control" name="Content"></textarea>
             <input type="submit" value="Submit" />

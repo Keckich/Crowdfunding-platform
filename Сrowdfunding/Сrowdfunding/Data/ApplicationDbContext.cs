@@ -17,6 +17,8 @@ namespace Сrowdfunding.Data
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Dislike> Dislikes { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +30,8 @@ namespace Сrowdfunding.Data
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Rewards).WithOne(rew => rew.Campaign).HasForeignKey(rew => rew.CampaignId).OnDelete(DeleteBehavior.Cascade);
             //modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Ratings).WithOne(r => r.User).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Ratings).WithOne(r => r.Campaign).HasForeignKey(r => r.CampaignId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Comment>().HasMany(comm => comm.Likes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Comment>().HasMany(comm => comm.Dislikes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

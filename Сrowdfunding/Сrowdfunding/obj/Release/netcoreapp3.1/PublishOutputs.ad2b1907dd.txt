@@ -1,8 +1,10 @@
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\Сrowdfunding.exe
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\campaign-block.css
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\comment.css
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\jquery.pagedown-bootstrap.css
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\site.css
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\favicon.ico
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\comments.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\pagedown\jquery.pagedown-bootstrap.combined.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\pagedown\jquery.pagedown-bootstrap.combined.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\pagedown\jquery.pagedown-bootstrap.js
@@ -31,6 +33,8 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTm
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\bootstrap\LICENSE
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
@@ -43,8 +47,13 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTm
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.map
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\jquery\LICENSE.txt
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\microsoft\signalr\dist\browser\signalr.js
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\microsoft\signalr\dist\browser\signalr.min.js
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\moment.js\moment.min.js
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\client_secret_102145220985-utd9mhqgbamgu1tjiutlquis49t125bg.apps.googleusercontent.com.json
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\libman.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\Сrowdfunding.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\Сrowdfunding.runtimeconfig.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\PubTmp\Out\Сrowdfunding.pdb

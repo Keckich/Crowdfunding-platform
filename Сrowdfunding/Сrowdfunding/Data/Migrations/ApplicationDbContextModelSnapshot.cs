@@ -293,6 +293,12 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DislikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
 
@@ -301,6 +307,46 @@ namespace Сrowdfunding.Data.Migrations
                     b.HasIndex("CampaignId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Dislike", b =>
+                {
+                    b.Property<int>("DislikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DislikeId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("Dislikes");
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Like", b =>
+                {
+                    b.Property<int>("LikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Сrowdfunding.Models.Rating", b =>
@@ -420,6 +466,24 @@ namespace Сrowdfunding.Data.Migrations
                     b.HasOne("Сrowdfunding.Models.Campaign", "Campaign")
                         .WithMany("Comments")
                         .HasForeignKey("CampaignId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Dislike", b =>
+                {
+                    b.HasOne("Сrowdfunding.Models.Comment", "Comment")
+                        .WithMany("Dislikes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.Like", b =>
+                {
+                    b.HasOne("Сrowdfunding.Models.Comment", "Comment")
+                        .WithMany("Likes")
+                        .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
