@@ -493,7 +493,7 @@ namespace Сrowdfunding.Data.Migrations
                     b.HasOne("Сrowdfunding.Models.Campaign", "Campaign")
                         .WithMany("Ratings")
                         .HasForeignKey("CampaignId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

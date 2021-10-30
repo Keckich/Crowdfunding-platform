@@ -44,8 +44,8 @@ namespace Сrowdfunding.Controllers
         [HttpGet]
         public IActionResult GetComments()
         {
-            var res = _context.Comments.ToList();
-            return Ok(res);
+            var comments = _context.Comments.ToList();
+            return Ok(new { Comments = comments });
         }
 
         [HttpGet]
@@ -263,6 +263,15 @@ namespace Сrowdfunding.Controllers
             return RedirectToAction("CommentList", new { id = comment.CampaignId });
         }
 
+        public IActionResult DeleteComment(Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Comments.Remove(_context.Comments.Find(comment.CommentId));
+                _context.SaveChanges();
+            }
+            return RedirectToAction("CommentList", new { id = comment.CampaignId });
+        }
 
         public IActionResult Privacy()
         {

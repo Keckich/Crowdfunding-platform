@@ -463,3 +463,5 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\Microso
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\client_secret_102145220985-utd9mhqgbamgu1tjiutlquis49t125bg.apps.googleusercontent.com.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RatingPartial.cshtml.g.cs
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\libman.json
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\RoleManager\Index.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\RoleManager\Manage.cshtml.g.cs

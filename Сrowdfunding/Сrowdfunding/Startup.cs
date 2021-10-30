@@ -47,6 +47,7 @@ namespace Сrowdfunding
                         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionProd")));
             }
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication()
                     .AddGoogle(options =>

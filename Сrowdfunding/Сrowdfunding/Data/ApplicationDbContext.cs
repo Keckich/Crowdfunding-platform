@@ -29,7 +29,7 @@ namespace Сrowdfunding.Data
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Comments).WithOne(comm => comm.Campaign).HasForeignKey(comm => comm.CampaignId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Rewards).WithOne(rew => rew.Campaign).HasForeignKey(rew => rew.CampaignId).OnDelete(DeleteBehavior.Cascade);
             //modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Ratings).WithOne(r => r.User).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Campaign>().HasMany(camp => camp.Ratings).WithOne(r => r.Campaign).HasForeignKey(r => r.CampaignId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Campaign>().HasMany(camp => camp.Ratings).WithOne(r => r.Campaign).HasForeignKey(r => r.CampaignId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Likes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Dislikes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
         }
