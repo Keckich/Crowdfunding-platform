@@ -45,7 +45,9 @@ namespace Сrowdfunding.Controllers
         public IActionResult GetComments()
         {
             var comments = _context.Comments.ToList();
-            return Ok(new { Comments = comments });
+            bool isModer = this.User.IsInRole("Admin") || this.User.IsInRole("Moderator");
+            var username = _userManager.GetUserName(this.User);
+            return Ok(new { Comments = comments, IsModer = isModer, Username = username });
         }
 
         [HttpGet]
