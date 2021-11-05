@@ -96,7 +96,7 @@ namespace Сrowdfunding
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSignalR();
-            services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
+            services.AddSingleton<ICloudStorage, CloudinaryStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

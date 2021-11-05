@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,30 +19,28 @@ namespace Сrowdfunding.Controllers
 {
     public class CampaignController : Controller
     {
+        private readonly ILogger<CampaignController> _logger;
         private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
         private ICloudStorage _cloudStorage;
 
-        public CampaignController(ApplicationDbContext context, UserManager<IdentityUser> userManager, ICloudStorage cloudStorage)
+        public CampaignController(ApplicationDbContext context, UserManager<IdentityUser> userManager, ICloudStorage cloudStorage, ILogger<CampaignController> logger)
         {
             _context = context;
             _userManager = userManager;
             _cloudStorage = cloudStorage;
+            _logger = logger;
         }
 
-        /*private async Task UploadFile(Campaign campaign)
+        public async Task<string> GetFilePathAsync(IFormFile file)
         {
-            string fileNameForStorage = FormFileName(campaign.Name, campaign.ImageFile.FileName);
-            campaign.ImageUrl = await _cloudStorage.UploadFileAsync(campaign.ImageFile, fileNameForStorage);
-            campaign.ImageStorageName = fileNameForStorage;
+            var filePath = Path.GetTempFileName();
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return filePath;
         }
-
-        private static string FormFileName(string title, string fileName)
-        {
-            var fileExtension = Path.GetExtension(fileName);
-            var fileNameForStorage = $"{title}-{DateTime.Now.ToString("yyyyMMddHHmmss")}{fileExtension}";
-            return fileNameForStorage;
-        }*/
 
         [Authorize]
         [HttpGet]
@@ -54,14 +56,22 @@ namespace Сrowdfunding.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(Campaign campaign)
+        public async Task<IActionResult> CreateAsync(Campaign campaign)
         {
             if (ModelState.IsValid)
             {
-                /*if (campaign.ImageFile != null)
+                if (campaign.ImageFile != null)
+                {                    
+                    var file = campaign.ImageFile;   
+                    string filePath = await GetFilePathAsync(file);          
+                    var uri = _cloudStorage.UploadImage(filePath);
+                    campaign.ImageUrl = uri.ToString();
+                }
+                else
                 {
-                    await UploadFile(campaign);
-                }*/
+                    campaign.ImageUrl = "https://res.cloudinary.com/dwivxsl5s/image/upload/v1621205266/no-img_if8frz.jpg";
+                }
+                
                 campaign.Author = _userManager.GetUserName(this.User);
                 campaign.BeginTime = DateTime.Now;
                 campaign.RemainSum = campaign.TotalSum;

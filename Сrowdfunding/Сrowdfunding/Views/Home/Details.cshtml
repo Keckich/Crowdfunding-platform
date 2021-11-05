@@ -5,11 +5,11 @@
 }
 <article>
     <section class="row justify-content-between">
-        <div class="col-12 col-md-6 unit-img">
-            <img height="250" src="@Url.Content(Model.Campaign.ImageUrl)" />
+        <div class="col-12 col-md-6">
+            <img class="unit-img" height="250" src="@Url.Content(Model.Campaign.ImageUrl)" />
         </div>
         <div class="col-12 col-md-6">
-            <div id="detail-title" style="display: flex" class="justify-content-between">
+            <div id="detail-title" class="row justify-content-between">
                 <h2>@Model.Campaign.Name</h2>
                 <div id="rate-form">
                     @await Html.PartialAsync("_RatingPartial", Model.Rating)
@@ -43,6 +43,9 @@
         </div>
 
     </section>
+    <section>
+        @Model.Campaign.Story
+    </section>
     <nav>
         <hr />
         <form method="get">
@@ -50,6 +53,7 @@
         <hr />
     </nav>
     <section id="commentSection">
+        <h2>Comments</h2>
         <form method="post" asp-action="Details" asp-controller="Home"
               data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
             <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />

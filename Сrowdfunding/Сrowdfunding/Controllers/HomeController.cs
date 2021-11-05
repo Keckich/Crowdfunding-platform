@@ -7,11 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Сrowdfunding.CloudStorage;
 using System.Threading.Tasks;
 using Сrowdfunding.Data;
 using Сrowdfunding.Hubs;
 using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace Сrowdfunding.Controllers
 {
@@ -40,6 +43,7 @@ namespace Сrowdfunding.Controllers
             };
             return View(indexVm);
         }
+
 
         [HttpGet]
         public IActionResult GetComments()
@@ -70,7 +74,6 @@ namespace Сrowdfunding.Controllers
         [Authorize]
         public async Task<IActionResult> DetailsAsync(Comment comment, int id)
         {
-
             if (ModelState.IsValid)
             {
                 _logger.LogError("IN DETAILS");
@@ -81,8 +84,6 @@ namespace Сrowdfunding.Controllers
                 _context.Add(comment);
                 _context.SaveChanges();
                 await _commentHub.Clients.All.SendAsync("LoadComments");
-                
-                //return View("Details", commentVm);
                 return RedirectToAction("CommentList", new { id = id });
             }
             return View();
@@ -178,6 +179,42 @@ namespace Сrowdfunding.Controllers
             return PartialView(_context.Ratings.Find(id));
         }
 
+        public bool CheckLikes(Comment comment, string username)
+        {
+            return _context.Likes
+                    .Where(like => like.CommentId == comment.CommentId)
+                    .Where(like => like.Username == username)
+                    .Any();
+        }
+
+        public bool CheckDislikes(Comment comment, string username)
+        {
+            return _context.Dislikes
+                    .Where(dislike => dislike.CommentId == comment.CommentId)
+                    .Where(dislike => dislike.Username == username)
+                    .Any();
+        }
+
+        public void DecreaseLikes(Comment comment, string username, Comment dbComment)
+        {
+            var like = _context.Likes
+                   .Where(l => l.CommentId == comment.CommentId)
+                   .Where(l => l.Username == username)
+                   .FirstOrDefault();
+            _context.Likes.Remove(like);
+            dbComment.LikesCount--;
+        }
+
+        public void DecreaseDislikes(Comment comment, string username, Comment dbComment)
+        {
+            var dislike = _context.Dislikes
+                       .Where(d => d.CommentId == comment.CommentId)
+                       .Where(d => d.Username == username)
+                       .FirstOrDefault();
+            _context.Dislikes.Remove(dislike);
+            dbComment.DislikesCount--;
+        }
+
         [Authorize]
         public IActionResult Like(Comment comment)
         {
@@ -189,31 +226,15 @@ namespace Сrowdfunding.Controllers
                 CommentId = comment.CommentId,
                 Username = username
             };
-            if (_context.Likes
-                .Where(like => like.CommentId == comment.CommentId)
-                .Where(like => like.Username == username)
-                .Any())
+            if (CheckLikes(comment, username))
             {
-                var like = _context.Likes
-                   .Where(l => l.CommentId == comment.CommentId)
-                   .Where(l => l.Username == username)
-                   .FirstOrDefault();
-                _context.Likes.Remove(like);
-                dbComment.LikesCount--;
+                DecreaseLikes(comment, username, dbComment);
             }
             else
             {
-                if (_context.Dislikes
-                    .Where(dislike => dislike.CommentId == comment.CommentId)
-                    .Where(dislike => dislike.Username == username)
-                    .Any())
+                if (CheckDislikes(comment, username))
                 {
-                    var dislike = _context.Dislikes
-                       .Where(d => d.CommentId == comment.CommentId)
-                       .Where(d => d.Username == username)
-                       .FirstOrDefault();
-                    _context.Dislikes.Remove(dislike);
-                    dbComment.DislikesCount--;
+                    DecreaseDislikes(comment, username, dbComment);
                 }
                 _context.Likes.Add(newLike);
                 dbComment.LikesCount++;
@@ -232,31 +253,15 @@ namespace Сrowdfunding.Controllers
                 CommentId = comment.CommentId,
                 Username = username
             };
-            if (_context.Dislikes
-                .Where(dislike => dislike.CommentId == comment.CommentId)
-                .Where(dislike => dislike.Username == username)
-                .Any())
+            if (CheckDislikes(comment, username))
             {
-                var dislike = _context.Dislikes
-                   .Where(d => d.CommentId == comment.CommentId)
-                   .Where(d => d.Username == username)
-                   .FirstOrDefault();
-                _context.Dislikes.Remove(dislike);
-                dbComment.DislikesCount--;
+                DecreaseDislikes(comment, username, dbComment);
             }
             else
             {
-                if (_context.Likes
-                    .Where(like => like.CommentId == comment.CommentId)
-                    .Where(like => like.Username == username)
-                    .Any())
+                if (CheckLikes(comment, username))
                 {
-                    var like = _context.Likes
-                       .Where(l => l.CommentId == comment.CommentId)
-                       .Where(l => l.Username == username)
-                       .FirstOrDefault();
-                    _context.Likes.Remove(like);
-                    dbComment.LikesCount--;
+                    DecreaseLikes(comment, username, dbComment);
                 }
                 _context.Dislikes.Add(newDislike);
                 dbComment.DislikesCount++;

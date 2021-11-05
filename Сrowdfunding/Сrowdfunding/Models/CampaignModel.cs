@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,13 +12,18 @@ namespace Сrowdfunding.Models
     {
         public int Id { get; set; }
         public string Author { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string ShortDescription { get; set; }
+        [Required]
         public int TotalSum { get; set; }
         public int RemainSum { get; set; }
         public DateTime BeginTime { get; set; }
+        [Required]
         public DateTime EndTime { get; set; }
         public string Story { get; set; }
+        [Required]
         public int CategoryId { get; set; }
         public string ImageUrl { get; set; }
         [NotMapped]
