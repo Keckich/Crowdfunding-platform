@@ -26,6 +26,7 @@ namespace Сrowdfunding.Models
         [Required]
         public int CategoryId { get; set; }
         public string ImageUrl { get; set; }
+        public bool Ended { get; set; }
         [NotMapped]
         public virtual IFormFile ImageFile { get; set; }
         public string ImageStorageName { get; set; }

@@ -2,14 +2,14 @@
 @model Сrowdfunding.Models.ViewModels.CreateCampaignViewModel
 @{
 }
-<script type="text/javascript" src="~/js/pagedown/jquery.pagedown-bootstrap.combined.min.js"></script>
+@*<script type="text/javascript" src="~/js/pagedown/jquery.pagedown-bootstrap.combined.min.js"></script>
 <script type="text/javascript">
     (function () {
 
         $("textarea #pagedownMe").pagedownBootstrap();
 
     })();
-</script>
+</script>*@
 <section class="m-auto" style="width: 70%">
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -44,27 +44,12 @@
         </div>
         <div class="form-group">
             <label>Story:</label>
-            <div id="wmd-button-bar-0" class="wmd-button-bar">
-                <div id="wmd-button-row-0" class="btn-toolbar">
-                    <div id="wmd-button-group1-0" class="btn-group wmd-button-group1">
-                        <button id="wmd-bold-button-0" class="btn btn-default" title="Bold - Ctrl+B">
-                            <i class="fa fa-bold"></i>
-                        </button>
-                        <button></button>
-                    </div>
-                    <div id="wmd-button-group2-0" class="btn-group wmd-button-group2">
-
-                    </div>
-                    <div id="wmd-button-group3-0" class="btn-group wmd-button-group3">
-
-                    </div>
-                    <div id="wmd-button-group4-0" class="btn-group wmd-button-group4">
-
-                    </div>
-                </div>
-            </div>
-            <textarea id="pagedownMe" class="form-control" rows="4" style="resize: none;" name="Story">
-            </textarea>
+            <textarea id="editor1" class="form-control" style="resize: none;" name="Story"></textarea>
+            <script type="text/javascript">
+                @*CKEDITOR.config.extraPlugins = "imageresize";
+                CKEDITOR.config.imageResize = { maxWidth: 800, maxHeight: 800 };*@
+                CKEDITOR.replace('editor1');
+            </script>
         </div>
         <input type="submit" value="Create" />
     </form>

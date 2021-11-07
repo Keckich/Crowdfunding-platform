@@ -58,6 +58,12 @@ namespace Сrowdfunding.Controllers
         public IActionResult Details(int id)
         {
             _logger.LogInformation(DateTime.Now.ToString("dd.MM.yyyy, HH:mm:ss"));
+            var campaign = _context.Campaigns.Find(id);
+            if (campaign.EndTime < DateTime.Now || campaign.RemainSum == 0)
+            {
+                campaign.Ended = true;
+                _context.SaveChanges();
+            } 
             var commentVm = new CommentViewModel
             {
                 Campaign = _context.Campaigns.Find(id),
@@ -147,12 +153,22 @@ namespace Сrowdfunding.Controllers
         {
             var campaign = _context.Campaigns.Find(id);
             var rew = _context.Rewards.Find(reward.RewardId);
-            campaign.RemainSum -= reward.Price;
-            rew.Count--;
+            if (campaign.RemainSum <= reward.Price)
+            {
+                campaign.RemainSum = 0;
+            }
+            else
+            {
+                campaign.RemainSum -= reward.Price;
+            }
+            if (rew.Count > 0)
+            {
+                rew.Count--;
+            }            
             _context.SaveChanges();
             var supportVm = new SupportViewModel
             {
-                Campaign = _context.Campaigns.Find(id),
+                Campaign = campaign,
                 Rewards = _context.Rewards.ToList()
             };
             return View(supportVm);

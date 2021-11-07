@@ -234,6 +234,9 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Ended")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ImageStorageName")
                         .HasColumnType("nvarchar(max)");
 
@@ -241,12 +244,14 @@ namespace Сrowdfunding.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RemainSum")
                         .HasColumnType("int");
 
                     b.Property<string>("ShortDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Story")

@@ -39,12 +39,18 @@
                     </form>
                 }
             </div>
-
+            @if (Model.Campaign.Ended)
+            {
+                <div>
+                    <b>Campaign was ended!</b>
+                </div>
+            }                
         </div>
 
     </section>
-    <section>
-        @Model.Campaign.Story
+    <section id="story-section">
+        <h2>Story</h2>
+        @Html.Raw(Model.Campaign.Story)
     </section>
     <nav>
         <hr />

@@ -5,6 +5,6 @@
 {
     if (reward.CampaignId == Model.Campaign.Id)
     {
-        @await Html.PartialAsync("_RewardPartial", reward)
+        @await Html.PartialAsync("_RewardPartial", (reward, Model.Campaign))
     }
 }
