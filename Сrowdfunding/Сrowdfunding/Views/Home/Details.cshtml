@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-                
+
             <p>@Model.Campaign.ShortDescription</p>
             <div>
                 @Model.Campaign.Author
@@ -44,7 +44,7 @@
                 <div>
                     <b>Campaign was ended!</b>
                 </div>
-            }                
+            }
         </div>
 
     </section>
@@ -52,21 +52,45 @@
         <h2>Story</h2>
         @Html.Raw(Model.Campaign.Story)
     </section>
-    <nav>
-        <hr />
-        <form method="get">
-        </form>
-        <hr />
-    </nav>
-    <section id="commentSection">
-        <h2>Comments</h2>
-        <form method="post" asp-action="Details" asp-controller="Home"
-              data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
-            <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />
-            <textarea class="form-control" name="Content"></textarea>
-            <input type="submit" value="Submit" />
-        </form>
-        <div id="comments"></div>
-        @*@await Html.PartialAsync("~/Views/Home/CommentList.cshtml", Model)*@
+    <hr class="hr-tabs-top" />
+    <input class="radio" id="one" name="group" type="radio" checked />
+    <input class="radio" id="two" name="group" type="radio" />
+    <section class="tabs">
+        <label class="tab" id="one-tab" for="one">Comments</label>
+        <label class="tab" id="two-tab" for="two">News</label>
     </section>
+    <hr class="hr-tabs-bottom" />
+    <article class="panels">
+        <section id="commentSection" class="panel one-panel">
+            <h2>Comments</h2>
+            <form method="post" asp-action="Details" asp-controller="Home"
+                  data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">
+                <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />
+                <textarea class="form-control" name="Content"></textarea>
+                <input type="submit" value="Submit" />
+            </form>
+            <div id="comments"></div>
+        </section>
+        <section id="newsSection" class="panel two-panel">
+            <h2>News</h2>
+            @if (UserManager.GetUserAsync(User).Result != null)
+            {
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Campaign.Author)
+                {
+                    <form method="post" asp-action="AddNews" asp-controller="Home"
+                          data-ajax="true" data-ajax-mode="replace" data-ajax-update="#newsSection" enctype="multipart/form-data">
+                        <input type="hidden" name="CampaignId" value="@Model.Campaign.Id" />
+                        <input type="text" class="form-control" name="Title" />
+                        <textarea class="form-control" name="NewsContent"></textarea>
+                        <input type="submit" value="Submit" />
+                    </form>
+                }
+            }
+
+
+            <div id="news"></div>
+        </section>
+
+        @*@await Html.PartialAsync("~/Views/Home/CommentList.cshtml", Model)*@
+    </article>
 </article>

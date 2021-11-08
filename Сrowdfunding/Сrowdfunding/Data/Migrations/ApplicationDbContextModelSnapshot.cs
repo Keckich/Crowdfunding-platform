@@ -354,6 +354,35 @@ namespace Сrowdfunding.Data.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("Сrowdfunding.Models.News", b =>
+                {
+                    b.Property<int>("NewsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CampaignId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NewsContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsId");
+
+                    b.HasIndex("CampaignId");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("Сrowdfunding.Models.Rating", b =>
                 {
                     b.Property<int>("RateId")
@@ -489,6 +518,15 @@ namespace Сrowdfunding.Data.Migrations
                     b.HasOne("Сrowdfunding.Models.Comment", "Comment")
                         .WithMany("Likes")
                         .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Сrowdfunding.Models.News", b =>
+                {
+                    b.HasOne("Сrowdfunding.Models.Campaign", "Campaign")
+                        .WithMany("News")
+                        .HasForeignKey("CampaignId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

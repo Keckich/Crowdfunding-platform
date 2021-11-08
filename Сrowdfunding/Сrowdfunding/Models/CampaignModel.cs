@@ -32,6 +32,7 @@ namespace Сrowdfunding.Models
         public string ImageStorageName { get; set; }
         public Category Category { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<News> News { get; set; }
         public List<Reward> Rewards { get; set; }
         public List<Rating> Ratings { get; set; }
 

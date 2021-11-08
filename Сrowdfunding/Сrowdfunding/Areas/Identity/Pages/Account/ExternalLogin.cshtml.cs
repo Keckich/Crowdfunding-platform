@@ -125,6 +125,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user);
+                await _userManager.AddToRoleAsync(user, Enums.Roles.User.ToString());
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);

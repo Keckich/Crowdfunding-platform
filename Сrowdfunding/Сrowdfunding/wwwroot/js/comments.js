@@ -67,7 +67,7 @@
 }
 
 $(() => {
-    var connection = new signalR.HubConnectionBuilder().withUrl("/CommentHub").build();
+    let connection = new signalR.HubConnectionBuilder().withUrl("/CommentHub").build();
     connection.on("LoadComments", () => {
         LoadCommData();
     });

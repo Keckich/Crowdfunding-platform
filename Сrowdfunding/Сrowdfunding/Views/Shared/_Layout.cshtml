@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Сrowdfunding</title>
     <link href="~/lib/ckeditor/contents.css" rel="stylesheet" />
+    <link href="~/css/tabs.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/campaign-block.css" />
@@ -34,11 +35,11 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Role manager</a>
-                                </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Role manager</a>
+                        </li>
                             }
                         }
                     </ul>
@@ -57,10 +58,11 @@
             <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
             <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
             <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-            
             <script src="~/js/site.js" asp-append-version="true"></script>
             <script src="~/js/comments.js"></script>
+            <script src="~/js/news.js"></script>
             <script type="text/javascript" src="~/js/pagedown/jquery.pagedown-bootstrap.combined.min.js"></script>
+
             @RenderBody()
         </main>
     </div>
@@ -71,5 +73,10 @@
         </div>
     </footer>
     @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        @*CKEDITOR.config.extraPlugins = "imageresize";
+        CKEDITOR.config.imageResize = { maxWidth: 800, maxHeight: 800 };*@
+        CKEDITOR.replace('editor1');
+    </script>
 </body>
 </html>

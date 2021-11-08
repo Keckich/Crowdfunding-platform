@@ -24,14 +24,15 @@ namespace Сrowdfunding
 
             string connectionString;
             // получаем строку подключения из файла appsettings.json
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            /*if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 connectionString = config.GetConnectionString("DefaultConnection");
             }
             else
             {
-                connectionString = config.GetConnectionString("DefaultConnectionProd");
-            }
+                connectionString = config.GetConnectionString("SomeeConnection");
+            }*/
+            connectionString = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString, opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds));
             return new ApplicationDbContext(optionsBuilder.Options);
         }

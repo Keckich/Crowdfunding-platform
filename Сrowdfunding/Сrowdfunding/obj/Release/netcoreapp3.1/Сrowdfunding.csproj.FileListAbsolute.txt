@@ -110,7 +110,6 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.Extensions.ObjectPool.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.Extensions.Options.DataAnnotations.dll
-D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.Extensions.WebEncoders.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.JSInterop.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.Net.Http.Headers.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\Microsoft.VisualBasic.Core.dll
@@ -240,7 +239,6 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Text.Encoding.CodePages.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Text.Encoding.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Text.Encoding.Extensions.dll
-D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Text.Encodings.Web.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Text.RegularExpressions.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Threading.Channels.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\refs\System.Threading.dll
@@ -460,6 +458,12 @@ D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\Googl
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\Google.Apis.Storage.v1.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\Google.Cloud.Storage.V1.dll
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Twitter.dll
-D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\client_secret_102145220985-utd9mhqgbamgu1tjiutlquis49t125bg.apps.googleusercontent.com.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\libman.json
 D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\Razor\Views\Shared\_RatingPartial.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\CloudinaryDotNet.dll
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\bin\Release\netcoreapp3.1\System.Text.Encodings.Web.dll
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\CampaignEdit.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Campaigns.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\Razor\Views\RoleManager\Index.cshtml.g.cs
+D:\Itra-crowdfunding\Сrowdfunding\Сrowdfunding\obj\Release\netcoreapp3.1\Razor\Views\RoleManager\Manage.cshtml.g.cs

@@ -27,7 +27,7 @@ namespace Сrowdfunding
                     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await RoleInitial.SeedRolesAsync(roleManager);
-                    await RoleInitial.SeedAdminAsync(userManager, roleManager);
+                    await RoleInitial.SeedAdminAsync(userManager);
 
                 }
                 catch (Exception ex)

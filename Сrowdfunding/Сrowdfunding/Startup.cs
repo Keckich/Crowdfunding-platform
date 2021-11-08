@@ -62,8 +62,8 @@ namespace Сrowdfunding
                         options.ConsumerKey = "9iGXRjBEfQ5v96uypzvKukgQ1";
                         options.ConsumerSecret = "TWiFCyDQh1pGqtoNruWW4tUcaVnDQ9cgJkSqmRlVIB3m34jOGA";
                         options.RetrieveUserDetails = true;
-                    })
-                    .AddOAuth("GitHub", "GitHub", options => {
+                    });
+                    /*.AddOAuth("GitHub", "GitHub", options => {
                         options.ClientId = "3f2f88bcde7f5e148a0a";
                         options.ClientSecret = "8f60512f87f7a7ef9c64287910d8b0a7c3116d88";
                         options.CallbackPath = new Microsoft.AspNetCore.Http.PathString("/signin-github");
@@ -86,13 +86,13 @@ namespace Сrowdfunding
                         options.AuthorizationEndpoint = "https://oauth.vk.com/authorize";
                         options.TokenEndpoint = "https://oauth.vk.com/access_token";
                         options.Scope.Add("email");
-                        /*options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "Id");
+                        *//*options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "Id");
 
                         options.ClaimActions.MapJsonKey(ClaimTypes.Name, "Email", ClaimValueTypes.Email);
-                        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "Email", ClaimValueTypes.Email);*/
+                        options.ClaimActions.MapJsonKey(ClaimTypes.Email, "Email", ClaimValueTypes.Email);*//*
                         options.SaveTokens = true;
 
-                    }); ;
+                    }); */
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSignalR();
@@ -136,6 +136,7 @@ namespace Сrowdfunding
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<CommentHub>("/CommentHub");
+                endpoints.MapHub<NewsHub>("/NewsHub");
                 endpoints.MapRazorPages();
             });
         }

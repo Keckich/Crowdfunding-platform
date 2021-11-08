@@ -32,6 +32,7 @@ namespace Сrowdfunding.Controllers
             _logger = logger;
         }
 
+        
         public async Task<string> GetFilePathAsync(IFormFile file)
         {
             var filePath = Path.GetTempFileName();

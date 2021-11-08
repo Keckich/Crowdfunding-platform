@@ -8,7 +8,17 @@
     border: 2px solid;
     border-radius: 8px;
 }
-
+.unit-img img {
+	width: 100%;
+	border-radius: 8px;
+}
+#story-section {
+	margin-top: 50px;
+}
+#story-section img {
+	max-height: 800px;
+	max-width: 800px;
+}
 .rating-area {
 	display: flex;
 	flex-direction: row-reverse;

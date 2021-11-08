@@ -14,7 +14,7 @@ namespace Сrowdfunding
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Moderator.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.User.ToString()));
         }
-        public static async Task SeedAdminAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAdminAsync(UserManager<IdentityUser> userManager)
         {
             var defaultUser = new IdentityUser
             {

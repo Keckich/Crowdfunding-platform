@@ -24,13 +24,15 @@ namespace Сrowdfunding.Controllers
         private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
         private readonly IHubContext<CommentHub> _commentHub;
+        private readonly IHubContext<NewsHub> _newsHub;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, IHubContext<CommentHub> commentHub)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, IHubContext<CommentHub> commentHub, IHubContext<NewsHub> newsHub)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
             _commentHub = commentHub;
+            _newsHub = newsHub;
         }
 
 
@@ -107,6 +109,36 @@ namespace Сrowdfunding.Controllers
                 }
             };
             return PartialView(commentVm);
+        }
+
+        [HttpGet]
+        public IActionResult GetNews()
+        {
+            var news = _context.News.ToList();
+            bool isModer = this.User.IsInRole("Admin") || this.User.IsInRole("Moderator");
+            var username = _userManager.GetUserName(this.User);
+            return Ok(new { News = news, IsModer = isModer, Username = username });
+        }
+
+        public async Task<IActionResult> AddNewsAsync(News news)
+        {
+            var username = _userManager.GetUserName(this.User);
+            news.Author = username;
+            news.PostDate = DateTime.Now;
+            _context.Add(news);
+            _context.SaveChanges();
+            await _newsHub.Clients.All.SendAsync("LoadNews");
+            return RedirectToAction("NewsList", new { id = news.CampaignId });
+        }
+
+        public PartialViewResult NewsList(int id)
+        {
+            var newsVm = new NewsViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                News = _context.News.ToList()                
+            };
+            return PartialView(newsVm);
         }
 
         [HttpGet]
@@ -294,6 +326,16 @@ namespace Сrowdfunding.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("CommentList", new { id = comment.CampaignId });
+        }
+
+        public IActionResult DeleteNews(News news)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.News.Remove(_context.News.Find(news.NewsId));
+                _context.SaveChanges();
+            }
+            return RedirectToAction("NewsList", new { id = news.CampaignId });
         }
 
         public IActionResult Privacy()
