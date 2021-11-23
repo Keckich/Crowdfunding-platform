@@ -1,1 +1,1 @@
-# Crowdfunding-platform
+# Crowdfunding Platform
