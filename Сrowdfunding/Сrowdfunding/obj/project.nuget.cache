@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mZghJT6FnYtpSW1YuTeWQI6TYbT+Daix2/47VJ+26A80AbclghLl86eC2EOnDREAz4RVTGy3xSi5YfsjtXTKUA==",
+  "dgSpecHash": "/jPqwVDqeyCp4iOru4Uzqc8pOSn05AQqctBQ6ovlq2TGYUKjNcLTg4uvdky/2H1iG44gdBsGKXV7BJW70fB2eQ==",
   "success": true,
-  "projectFilePath": "D:\\Itra-crowdfunding\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
+  "projectFilePath": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\cloudinarydotnet\\1.15.1\\cloudinarydotnet.1.15.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",

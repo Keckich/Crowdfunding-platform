@@ -9504,11 +9504,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Itra-crowdfunding\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
+      "projectUniqueName": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
       "projectName": "Сrowdfunding",
-      "projectPath": "D:\\Itra-crowdfunding\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
+      "projectPath": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "D:\\Itra-crowdfunding\\Сrowdfunding\\Сrowdfunding\\obj\\",
+      "outputPath": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
