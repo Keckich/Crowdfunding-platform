@@ -1,13 +1,20 @@
-﻿
+﻿@model Сrowdfunding.Models.ViewModels.SearchViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Search</h1>
-<form asp-controller="Search" asp-action="Index">
-    <p>
-        <input type="text" name="SearchString" />
+<form asp-controller="Search" asp-action="Search">
+    <section class="col-12 search-field-container">
+        <input class="search-field" type="text" name="SearchString" />
         <input type="submit" value="Search" />
-    </p>
+    </section>
 </form>
 
+@if (Model?.Campaigns != null && !string.IsNullOrEmpty(Model.SearchString))
+{
+    @foreach (var campaign in Model.Campaigns)
+    {
+        @await Html.PartialAsync("_CampaignPartial", campaign)
+    }
+}
