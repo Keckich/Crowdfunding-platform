@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Сrowdfunding.Models;
+using Сrowdfunding.Services;
 
 namespace Сrowdfunding.Areas.Identity.Pages.Account
 {
@@ -90,8 +91,11 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    /*await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+                    EmailService emailService = new EmailService();
+                    await emailService.SendEmailAsync(user.Email, "Email-Подтверждение", $"Здравствуйте, {user.UserName}! Подтвердите электронную. Так мы сможем" +
+                        $" понять, что вы ввели верную почту, и вы сразу сможете войти в свой аккаунт.\n<a href='{callbackUrl}'>Подвердите электронную почту.</a>");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

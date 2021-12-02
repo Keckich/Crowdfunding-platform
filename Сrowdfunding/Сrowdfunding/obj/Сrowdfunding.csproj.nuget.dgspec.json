@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj": {}
+    "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj": {}
   },
   "projects": {
-    "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj": {
+    "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
+        "projectUniqueName": "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
         "projectName": "Сrowdfunding",
-        "projectPath": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
+        "projectPath": "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Itra-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\obj\\",
+        "outputPath": "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[3.4.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[3.1.8, )"
@@ -62,11 +66,11 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.13, )"
+              "version": "[3.1.21, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.1.13, )"
+              "version": "[3.1.21, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
@@ -74,13 +78,13 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.13, )"
+              "version": "[3.1.21, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.13, )"
+              "version": "[3.1.21, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
