@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 
 namespace Сrowdfunding.CloudStorage
 {
@@ -24,6 +25,16 @@ namespace Сrowdfunding.CloudStorage
             };
             var uploadResult = cloudinary.Upload(uploadParams);
             return uploadResult.Url;
+        }
+
+        public async Task<string> GetFilePathAsync(IFormFile file)
+        {
+            var filePath = Path.GetTempFileName();
+            using (var stream = File.Create(filePath))
+            {
+                await file.CopyToAsync(stream);
+            }
+            return filePath;
         }
 
     }

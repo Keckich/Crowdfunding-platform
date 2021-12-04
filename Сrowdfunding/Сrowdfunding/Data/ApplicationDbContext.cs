@@ -22,6 +22,8 @@ namespace Сrowdfunding.Data
         public DbSet<Dislike> Dislikes { get; set; }
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Achievement> Achievements { get; set; }
+        public DbSet<UserAchievementsModel> UserAchievements { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -34,6 +36,9 @@ namespace Сrowdfunding.Data
             modelBuilder.Entity<Campaign>().HasMany(camp => camp.Ratings).WithOne(r => r.Campaign).HasForeignKey(r => r.CampaignId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Likes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Dislikes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserAchievementsModel>().HasKey(ua => new { ua.UserId, ua.AchievementId });
+            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.Achievement).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.AchievementId);
+            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.User).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.UserId);
         }
     }
 }

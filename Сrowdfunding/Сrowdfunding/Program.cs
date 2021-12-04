@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Сrowdfunding.Data;
+using Сrowdfunding.Services.Initial;
 
 namespace Сrowdfunding
 {
@@ -24,6 +25,7 @@ namespace Сrowdfunding
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     CategoryInitial.Initialize(context);
+                    AchievementInitial.Initialize(context);
                     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await RoleInitial.SeedRolesAsync(roleManager);

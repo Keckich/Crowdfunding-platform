@@ -8,6 +8,7 @@ namespace Сrowdfunding.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public List<Rating> Ratings { get; set; }
+        //public List<Rating> Ratings { get; set; }
+        public ICollection<UserAchievementsModel> UserAchievements { get; set; }
     }
 }

@@ -32,17 +32,6 @@ namespace Сrowdfunding.Controllers
             _logger = logger;
         }
 
-        
-        public async Task<string> GetFilePathAsync(IFormFile file)
-        {
-            var filePath = Path.GetTempFileName();
-            using (var stream = System.IO.File.Create(filePath))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return filePath;
-        }
-
         [Authorize]
         [HttpGet]
         public IActionResult Create()
@@ -64,7 +53,7 @@ namespace Сrowdfunding.Controllers
                 if (campaign.ImageFile != null)
                 {                    
                     var file = campaign.ImageFile;   
-                    string filePath = await GetFilePathAsync(file);          
+                    string filePath = await _cloudStorage.GetFilePathAsync(file);          
                     var uri = _cloudStorage.UploadImage(filePath);
                     campaign.ImageUrl = uri.ToString();
                 }
@@ -76,6 +65,18 @@ namespace Сrowdfunding.Controllers
                 campaign.Author = _userManager.GetUserName(this.User);
                 campaign.BeginTime = DateTime.Now;
                 campaign.RemainSum = campaign.TotalSum;
+                var achieve = new UserAchievementsModel
+                {
+                    UserId = _userManager.GetUserId(this.User),
+                    AchievementId = _context.Achievements.Where(x => x.Name == "Good start").First().Id,
+                    GetDate = DateTime.Now
+                };
+                var campaignsCurrentUserCount = _context.Campaigns.Where(x => x.Author == campaign.Author).Count();
+                var isUserHasAcvhieve = _context.UserAchievements.Where(x => x.UserId == achieve.UserId && x.AchievementId == achieve.AchievementId).Any();
+                if (!isUserHasAcvhieve && campaignsCurrentUserCount < 1)
+                {
+                    _context.UserAchievements.Add(achieve);
+                }
                 _context.Campaigns.Add(campaign);
                 _context.SaveChanges();
             }

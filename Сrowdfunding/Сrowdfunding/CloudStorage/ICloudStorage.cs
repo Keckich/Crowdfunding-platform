@@ -9,5 +9,7 @@ namespace Сrowdfunding.CloudStorage
     public interface ICloudStorage
     {
         Uri UploadImage(string file);
+
+        Task<string> GetFilePathAsync(IFormFile file);
     }
 }

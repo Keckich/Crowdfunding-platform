@@ -25,14 +25,22 @@ namespace Сrowdfunding.Controllers
         private UserManager<IdentityUser> _userManager;
         private readonly IHubContext<CommentHub> _commentHub;
         private readonly IHubContext<NewsHub> _newsHub;
+        private ICloudStorage _cloudStorage;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, IHubContext<CommentHub> commentHub, IHubContext<NewsHub> newsHub)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager, 
+            IHubContext<CommentHub> commentHub, 
+            IHubContext<NewsHub> newsHub,
+            ICloudStorage cloudStorage)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
             _commentHub = commentHub;
             _newsHub = newsHub;
+            _cloudStorage = cloudStorage;
         }
 
 
@@ -144,15 +152,36 @@ namespace Сrowdfunding.Controllers
         [HttpGet]
         public IActionResult Rewards(int id)
         {
-            var campaign = _context.Campaigns.Find(id);
-            return View(campaign);
+            var rewardViewModel = new RewardViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Reward = new Reward()
+            };
+            
+            return View(rewardViewModel);
         }
 
         [HttpPost]
-        public IActionResult Rewards(Reward reward)
+        public async Task<IActionResult> RewardsAsync(Reward reward)
         {
-            _context.Add(reward);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                if (reward.ImageFile != null)
+                {
+                    var file = reward.ImageFile;
+                    string filePath = await _cloudStorage.GetFilePathAsync(file);
+                    var uri = _cloudStorage.UploadImage(filePath);
+                    reward.ImageUrl = uri.ToString();
+                }
+                else
+                {
+                    reward.ImageUrl = "https://res.cloudinary.com/dwivxsl5s/image/upload/v1621205266/no-img_if8frz.jpg";
+                }
+
+                _context.Add(reward);
+                _context.SaveChanges();
+            }
+            
             var username = _userManager.GetUserName(this.User);
             var commentVm = new CommentViewModel
             {
@@ -173,7 +202,7 @@ namespace Сrowdfunding.Controllers
             var supportVm = new SupportViewModel
             {
                 Campaign = _context.Campaigns.Find(id),
-                Rewards = _context.Rewards.ToList()
+                Rewards = _context.Rewards.Where(x => x.CampaignId == id).ToList()
             };
             
             return View(supportVm);
