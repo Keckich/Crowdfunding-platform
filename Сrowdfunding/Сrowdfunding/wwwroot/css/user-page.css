@@ -1,0 +1,28 @@
+﻿.user-info-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.achievement-wrapper {
+    background-color: wheat;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.achievement-inside-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.img-margin {
+    margin-right: 20px;
+}
+
+@media (max-width: 576px) {
+    .col-12 {
+        flex: 100%;
+    }
+}

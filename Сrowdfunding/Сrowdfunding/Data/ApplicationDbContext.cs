@@ -39,6 +39,7 @@ namespace Сrowdfunding.Data
             modelBuilder.Entity<UserAchievementsModel>().HasKey(ua => new { ua.UserId, ua.AchievementId });
             modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.Achievement).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.AchievementId);
             modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.User).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.UserId);
+            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Campaigns).WithOne(c => c.User).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

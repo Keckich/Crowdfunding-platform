@@ -1,14 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<ApplicationUser> UserManager
 @model Comment
 @{
 }
 <div class="col-8 single-comment">
     <div class="row justify-content-between">
-        <div>
-            <time>@Model.PostDate</time>
-            <p>@Model.Author</p>
+        <div style="display: inline-flex">
+            <div class="nav-item" style="margin-left: 10px">
+                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="@Url.Content(UserManager.FindByNameAsync(Model.Author).Result.ImageUrl)">
+            </div>
+            <div>
+                <time>@Model.PostDate</time>
+                <p>@Model.Author</p>
+            </div>
         </div>
+
         @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Author)
         {
             <form method="post" asp-action="DeleteComment" asp-controller="Home"

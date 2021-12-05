@@ -22,7 +22,7 @@ namespace Сrowdfunding.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _context;
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
         private readonly IHubContext<CommentHub> _commentHub;
         private readonly IHubContext<NewsHub> _newsHub;
         private ICloudStorage _cloudStorage;
@@ -30,7 +30,7 @@ namespace Сrowdfunding.Controllers
         public HomeController(
             ILogger<HomeController> logger, 
             ApplicationDbContext context, 
-            UserManager<IdentityUser> userManager, 
+            UserManager<ApplicationUser> userManager, 
             IHubContext<CommentHub> commentHub, 
             IHubContext<NewsHub> newsHub,
             ICloudStorage cloudStorage)
@@ -61,7 +61,8 @@ namespace Сrowdfunding.Controllers
             var comments = _context.Comments.ToList();
             bool isModer = this.User.IsInRole("Admin") || this.User.IsInRole("Moderator");
             var username = _userManager.GetUserName(this.User);
-            return Ok(new { Comments = comments, IsModer = isModer, Username = username });
+            var users = _userManager.Users.ToList();
+            return Ok(new { Comments = comments, IsModer = isModer, Username = username, Users = users });
         }
 
         [HttpGet]

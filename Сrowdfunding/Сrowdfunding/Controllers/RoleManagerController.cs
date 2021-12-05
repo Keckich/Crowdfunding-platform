@@ -7,17 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Сrowdfunding.Data;
+using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;
 
 namespace Сrowdfunding.Controllers
 {
     public class RoleManagerController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RoleManagerController> _logger;
 
-        public RoleManagerController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<RoleManagerController> logger)
+        public RoleManagerController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<RoleManagerController> logger)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -40,7 +41,7 @@ namespace Сrowdfunding.Controllers
             return View(userRolesVm);
         }
 
-        private async Task<List<string>> GetUserRoles(IdentityUser user)
+        private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
         }

@@ -12,6 +12,7 @@ namespace Сrowdfunding.Models
     {
         public int Id { get; set; }
         public string Author { get; set; }
+        public string UserId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -35,6 +36,6 @@ namespace Сrowdfunding.Models
         public List<News> News { get; set; }
         public List<Reward> Rewards { get; set; }
         public List<Rating> Ratings { get; set; }
-
+        public ApplicationUser User { get; set; }
     }
 }

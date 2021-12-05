@@ -13,7 +13,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
 {
     public class CampaignEditModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private ApplicationDbContext _context;
         private readonly ILogger<CampaignsModel> _logger;
 
@@ -22,7 +22,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
 
         public CampaignEditView CampaignEdit { get; set; }
 
-        public CampaignEditModel(ILogger<CampaignsModel> logger, UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public CampaignEditModel(ILogger<CampaignsModel> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;

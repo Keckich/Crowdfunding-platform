@@ -4,11 +4,11 @@
 .inside-container {
     padding: 0 15px 0 23%;
 }
-.unit-img {
+.unit-index-img {
     border: 2px solid;
     border-radius: 8px;
 }
-.unit-img img {
+.unit-index-img img {
 	width: 100%;
 	border-radius: 8px;
 }

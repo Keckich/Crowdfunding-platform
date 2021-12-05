@@ -1,12 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<ApplicationUser> UserManager
 @model Сrowdfunding.Models.ViewModels.CommentViewModel
 @{
 }
 <article>
     <section class="row justify-content-between">
-        <div class="col-12 col-md-6">
-            <img class="unit-img" height="250" src="@Url.Content(Model.Campaign.ImageUrl)" />
+        <div class="col-12 col-md-6 img-container">
+            <img class="unit-img img-border" src="@Url.Content(Model.Campaign.ImageUrl)" />
         </div>
         <div class="col-12 col-md-6">
             <div id="detail-title" class="row justify-content-between">
@@ -19,7 +19,9 @@
 
             <p>@Model.Campaign.ShortDescription</p>
             <div>
-                @Model.Campaign.Author
+                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Campaign.UserId">
+                    @Model.Campaign.Author
+                </a>
             </div>
             <div>
                 <b>Goal: @Model.Campaign.TotalSum$</b>
@@ -86,8 +88,6 @@
                     </form>
                 }
             }
-
-
             <div id="news"></div>
         </section>
 

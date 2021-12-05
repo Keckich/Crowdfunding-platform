@@ -37,6 +37,16 @@
     <Compile Remove="Data\Migrations\20210516002022_Deploy3.Designer.cs" />
     <Compile Remove="Data\Migrations\20211203233856_Achievement1.cs" />
     <Compile Remove="Data\Migrations\20211203233856_Achievement1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211204171640_User4.cs" />
+    <Compile Remove="Data\Migrations\20211204171640_User4.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211204183012_User5.cs" />
+    <Compile Remove="Data\Migrations\20211204183012_User5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211204183219_User5.cs" />
+    <Compile Remove="Data\Migrations\20211204183219_User5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211204230404_Achievement2.cs" />
+    <Compile Remove="Data\Migrations\20211204230404_Achievement2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211204230825_Achievement2.cs" />
+    <Compile Remove="Data\Migrations\20211204230825_Achievement2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

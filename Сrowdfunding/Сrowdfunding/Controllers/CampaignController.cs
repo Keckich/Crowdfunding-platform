@@ -21,10 +21,10 @@ namespace Сrowdfunding.Controllers
     {
         private readonly ILogger<CampaignController> _logger;
         private ApplicationDbContext _context;
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
         private ICloudStorage _cloudStorage;
 
-        public CampaignController(ApplicationDbContext context, UserManager<IdentityUser> userManager, ICloudStorage cloudStorage, ILogger<CampaignController> logger)
+        public CampaignController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICloudStorage cloudStorage, ILogger<CampaignController> logger)
         {
             _context = context;
             _userManager = userManager;
@@ -63,12 +63,25 @@ namespace Сrowdfunding.Controllers
                 }
                 
                 campaign.Author = _userManager.GetUserName(this.User);
+                campaign.UserId = _userManager.GetUserId(this.User);
                 campaign.BeginTime = DateTime.Now;
                 campaign.RemainSum = campaign.TotalSum;
                 var achieve = new UserAchievementsModel
                 {
                     UserId = _userManager.GetUserId(this.User),
+                    AchievementId = _context.Achievements.Where(x => x.Name == "That's only the beginning!").First().Id,
+                    GetDate = DateTime.Now
+                };
+                var achieve2 = new UserAchievementsModel
+                {
+                    UserId = _userManager.GetUserId(this.User),
                     AchievementId = _context.Achievements.Where(x => x.Name == "Good start").First().Id,
+                    GetDate = DateTime.Now
+                };
+                var achieve3 = new UserAchievementsModel
+                {
+                    UserId = _userManager.GetUserId(this.User),
+                    AchievementId = _context.Achievements.Where(x => x.Name == "It could be worse...").First().Id,
                     GetDate = DateTime.Now
                 };
                 var campaignsCurrentUserCount = _context.Campaigns.Where(x => x.Author == campaign.Author).Count();
@@ -76,6 +89,8 @@ namespace Сrowdfunding.Controllers
                 if (!isUserHasAcvhieve && campaignsCurrentUserCount < 1)
                 {
                     _context.UserAchievements.Add(achieve);
+                    _context.UserAchievements.Add(achieve2);
+                    _context.UserAchievements.Add(achieve3);
                 }
                 _context.Campaigns.Add(campaign);
                 _context.SaveChanges();

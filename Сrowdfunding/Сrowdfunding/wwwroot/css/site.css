@@ -71,3 +71,28 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/* Custom styles
+----------------------------------------------------*/
+.img-max-width {
+    max-width: 250px;
+}
+.img-border {
+    border: 2px solid;
+    border-radius: 8px;
+}
+.img-container-border {
+    border: 2px solid;
+    border-radius: 8px;
+}
+.img-container {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+}
+.unit-img {
+    width: auto;
+    height: 100%;
+}
+

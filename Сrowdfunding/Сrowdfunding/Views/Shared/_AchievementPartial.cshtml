@@ -1,0 +1,17 @@
+﻿@model Сrowdfunding.Models.Achievement
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="col-8 achievement-wrapper">
+    <div class="achievement-inside-container">
+        <div class="unit-img img-margin">
+            <img height="65" src="@Url.Content(Model.ImageUrl)" />
+        </div>
+        <div>
+            <strong>@Model.Name</strong>            
+            <p>
+                @Model.Description
+            </p>
+        </div>
+    </div>
+</div>

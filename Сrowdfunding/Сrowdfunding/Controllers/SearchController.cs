@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Сrowdfunding.Data;
+using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;
 
 namespace Сrowdfunding.Controllers
@@ -14,9 +15,9 @@ namespace Сrowdfunding.Controllers
     {
         private readonly ILogger<SearchController> _logger;
         private ApplicationDbContext _context;
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public SearchController(ILogger<SearchController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public SearchController(ILogger<SearchController> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = context;

@@ -290,9 +290,14 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<int>("TotalSum")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Campaigns");
                 });
@@ -482,8 +487,10 @@ namespace Сrowdfunding.Data.Migrations
                     b.Property<DateTime>("GetDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<int>("UserAchievementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("UserId", "AchievementId");
 
@@ -495,6 +502,9 @@ namespace Сrowdfunding.Data.Migrations
             modelBuilder.Entity("Сrowdfunding.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -557,6 +567,11 @@ namespace Сrowdfunding.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Сrowdfunding.Models.ApplicationUser", "User")
+                        .WithMany("Campaigns")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Сrowdfunding.Models.Comment", b =>

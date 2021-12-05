@@ -14,7 +14,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
     
     public class CampaignsModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private ApplicationDbContext _context;
         private readonly ILogger<CampaignsModel> _logger;
 
@@ -23,7 +23,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
 
         public InputCampaign Campaign { get; set; }
 
-        public CampaignsModel(ILogger<CampaignsModel> logger, UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public CampaignsModel(ILogger<CampaignsModel> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
@@ -33,7 +33,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
         public class InputCampaign
         {
             public List<Campaign> Campaigns { get; set; }
-            public IdentityUser User { get; set; }
+            public ApplicationUser User { get; set; }
         }
 
         public IActionResult OnGet()

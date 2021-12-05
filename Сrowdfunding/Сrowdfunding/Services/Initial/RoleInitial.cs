@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Сrowdfunding.Models;
 
 namespace Сrowdfunding
 {
@@ -14,9 +15,9 @@ namespace Сrowdfunding
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Moderator.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.User.ToString()));
         }
-        public static async Task SeedAdminAsync(UserManager<IdentityUser> userManager)
+        public static async Task SeedAdminAsync(UserManager<ApplicationUser> userManager)
         {
-            var defaultUser = new IdentityUser
+            var defaultUser = new ApplicationUser
             {
                 UserName = "vip.cod91@mail.ru",
                 Email = "vip.cod91@mail.ru",

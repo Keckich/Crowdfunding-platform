@@ -1,0 +1,68 @@
+﻿@model Сrowdfunding.Models.ViewModels.UserInfoViewModel
+@inject Сrowdfunding.Data.ApplicationDbContext context
+@{
+}
+<article>
+    <section class="user-info-wrapper">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 img-container img-max-width img-container-border">
+            <img class="unit-img" src="@Url.Content(Model.User.ImageUrl)" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+            <p>Username: @Model.User.UserName</p>
+            <p>Email: @Model.User.Email</p>
+        </div>
+    </section>
+    <hr class="hr-tabs-top" />
+    <input class="radio" id="one" name="group" type="radio" checked />
+    <input class="radio" id="two" name="group" type="radio" />
+    <section class="tabs">
+        <label class="tab" id="one-tab" for="one">Campaigns</label>
+        <label class="tab" id="two-tab" for="two">Achievements</label>
+    </section>
+    <hr class="hr-tabs-bottom" />
+    <section class="panels">
+        <div id="campaignSection" class="panel one-panel">
+            <h2>Campaigns</h2>
+            <table class="table table-bordered table-striped ">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Begin date</th>
+                        <th>End date</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Campaigns)
+                    {
+
+                        <tr>
+                            <td>
+                                <a asp-action="Details" asp-controller="Home" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BeginTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => context.Categories.Find(item.CategoryId).Name)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div id="achievementSection" class="panel two-panel">
+            <h2>Achievements</h2>
+            @foreach (var achievement in Model.Achievements)
+            {
+                @await Html.PartialAsync("_AchievementPartial", achievement)
+            }
+        </div>
+    </section>
+</article>
