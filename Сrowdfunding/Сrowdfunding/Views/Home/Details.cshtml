@@ -4,49 +4,47 @@
 @{
 }
 <article>
-    <section class="row justify-content-between">
-        <div class="col-12 col-md-6 img-container">
-            <img class="unit-img img-border" src="@Url.Content(Model.Campaign.ImageUrl)" />
+    <section class="row">
+        <div class="col-12 col-md-6 col-lg-4 img-container img-campaign-max-width img-container-border">
+            <img class="unit-img" src="@Url.Content(Model.Campaign.ImageUrl)" />
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 col-lg-6 col-xl-8 description-container">
             <div id="detail-title" class="row justify-content-between">
                 <h2>@Model.Campaign.Name</h2>
                 <div id="rate-form">
-                    @await Html.PartialAsync("_RatingPartial", Model.Rating)
+                    @await Html.PartialAsync("_RatingPartial", Model.Rating)                   
+
                 </div>
             </div>
 
 
-            <p>@Model.Campaign.ShortDescription</p>
+            <p style="word-wrap: break-word">@Model.Campaign.ShortDescription</p>
             <div>
                 <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Campaign.UserId">
                     @Model.Campaign.Author
                 </a>
             </div>
             <div>
-                <b>Goal: @Model.Campaign.TotalSum$</b>
-            </div>
-            <div>
-                <b>Remain @Model.Campaign.RemainSum$</b>
+                <b>Goal: @Model.Campaign.RemainSum / @Model.Campaign.TotalSum$</b>
             </div>
 
-            <div>
+            <div class="supp-btns-container">
                 <form method="get" asp-controller="Home" asp-action="Support" asp-route-id="@Model.Campaign.Id">
-                    <button>Support</button>
+                    <button class="sup-button">Support <i class="fa fa-hand-peace-o" aria-hidden="true"></i></button>
                 </form>
                 @if (UserManager.GetUserAsync(User).Result != null && UserManager.GetUserAsync(User).Result.UserName == Model.Campaign.Author)
                 {
                     <form method="get" asp-controller="Home" asp-action="Rewards" asp-route-id="@Model.Campaign.Id">
-                        <button>Add rewards</button>
+                        <button class="sup-button">Add rewards <i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </form>
                 }
+                @if (Model.Campaign.Ended)
+                {
+                    <div>
+                        <b>Campaign was ended!</b>
+                    </div>
+                }
             </div>
-            @if (Model.Campaign.Ended)
-            {
-                <div>
-                    <b>Campaign was ended!</b>
-                </div>
-            }
         </div>
 
     </section>
@@ -77,7 +75,7 @@
             <h2>News</h2>
             @if (UserManager.GetUserAsync(User).Result != null)
             {
-                @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Campaign.Author)
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.UserName == Model.Campaign.Author)
                 {
                     <form method="post" asp-action="AddNews" asp-controller="Home"
                           data-ajax="true" data-ajax-mode="replace" data-ajax-update="#newsSection" enctype="multipart/form-data">

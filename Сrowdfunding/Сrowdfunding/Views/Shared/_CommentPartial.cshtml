@@ -6,13 +6,30 @@
 <div class="col-8 single-comment">
     <div class="row justify-content-between">
         <div style="display: inline-flex">
-            <div class="nav-item" style="margin-left: 10px">
-                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="@Url.Content(UserManager.FindByNameAsync(Model.Author).Result.ImageUrl)">
-            </div>
-            <div>
-                <time>@Model.PostDate</time>
-                <p>@Model.Author</p>
-            </div>
+            @if (UserManager.FindByNameAsync(Model.Author)?.Result?.ImageUrl != null)
+            {
+                <div class="nav-item" style="margin-left: 10px">
+                    <img class="profile-icon" src="@Url.Content(UserManager.FindByNameAsync(Model.Author)?.Result.ImageUrl)">
+                </div>
+                <div>
+                    <time>@Model.PostDate</time>
+                    <p>
+                        <a asp-controller="User" asp-action="Index" asp-route-id="@UserManager.FindByNameAsync(Model.Author).Result.Id">
+                            @Model.Author
+                        </a>                        
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="nav-item" style="margin-left: 10px">
+                    <img class="profile-icon" src="https://res.cloudinary.com/dwivxsl5s/image/upload/v1638642467/defaultuser_kr3x61.png">
+                </div>
+                <div>
+                    <time>@Model.PostDate</time>
+                    <p>@Model.Author</p>
+                </div>
+            }
         </div>
 
         @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Author)

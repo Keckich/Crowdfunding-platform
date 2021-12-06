@@ -73,6 +73,17 @@ body {
 
 /* Custom styles
 ----------------------------------------------------*/
+.info-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin: 5px 10px 5px 3px;
+}
 .img-max-width {
     max-width: 250px;
 }

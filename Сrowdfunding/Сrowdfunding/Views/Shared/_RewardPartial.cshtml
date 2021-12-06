@@ -1,35 +1,36 @@
 ﻿@model (Сrowdfunding.Models.Reward, Сrowdfunding.Models.Campaign)
 @{
 }
-<div>
-    <div class="unit-img">
-        <img height="150" src="@Url.Content(Model.Item1.ImageUrl)" />
+<div class="reward-inside-container">
+    <div class="img-margin img-container img-container-border" style="height: 100px; min-width: 150px; max-width: 150px">
+        <img class="unit-img" src="@Url.Content(Model.Item1.ImageUrl)" />
     </div>
     <div class="text-left">
-        <div>
+        <div class="description-item">
             @Model.Item1.Description
         </div>
-        <div>
+        <div class="description-item">
             Delivery: @Model.Item1.Delivery
         </div>
         <div>
             Remain: @Model.Item1.Count
         </div>
-        <div>
-            Price: @Model.Item1.Price
-        </div>
-        <form method="post" asp-controller="Home" asp-action="Support" asp-route-id="@Model.Item1.CampaignId">
-            <input type="hidden" name="Price" value="@Model.Item1.Price" />
-            <input type="hidden" name="RewardId" value="@Model.Item1.RewardId" />
-            @if (Model.Item1.Count == 0 || Model.Item2.Ended)
-            {
-                <input type="submit" value="Buy" disabled />
-            }
-            else
-            {
-                <input type="submit" value="Buy" />
-            }
+        <div style="display: inline-flex">
+            <span>Price: @Model.Item1.Price$</span>
+            <form method="post" asp-controller="Home" asp-action="Support" asp-route-id="@Model.Item1.CampaignId">
+                <input type="hidden" name="Price" value="@Model.Item1.Price" />
+                <input type="hidden" name="RewardId" value="@Model.Item1.RewardId" />
+                @if (Model.Item1.Count == 0 || Model.Item2.Ended)
+                {
+                    <input type="submit" value="Buy" disabled />
+                }
+                else
+                {
+                    <input type="submit" value="Buy" />
+                }
 
-        </form>
+            </form>
+        </div>
+        
     </div>
 </div>

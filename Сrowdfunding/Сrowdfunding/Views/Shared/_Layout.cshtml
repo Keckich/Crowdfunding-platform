@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Сrowdfunding</title>
     <link href="~/lib/ckeditor/contents.css" rel="stylesheet" />
-    <link href="~/css/tabs.css" rel="stylesheet" />
+    <link href="~/css/tabs.css" rel="stylesheet" />    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/campaign-block.css" />
@@ -29,9 +29,7 @@
                 <div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Search" asp-action="Index">Search</a>
-                        </li>
+                        
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -79,6 +77,7 @@
             &copy; 2021 - Сrowdfunding - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    @await Component.InvokeAsync("Notyf") 
     @RenderSection("Scripts", required: false)
     <script type="text/javascript">
         @*CKEDITOR.config.extraPlugins = "imageresize";

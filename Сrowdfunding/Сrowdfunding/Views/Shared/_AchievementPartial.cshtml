@@ -1,16 +1,19 @@
-﻿@model Сrowdfunding.Models.Achievement
+﻿@model (Сrowdfunding.Models.Achievement, DateTime)
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <div class="col-8 achievement-wrapper">
     <div class="achievement-inside-container">
         <div class="unit-img img-margin">
-            <img height="65" src="@Url.Content(Model.ImageUrl)" />
+            <img height="65" src="@Url.Content(Model.Item1.ImageUrl)" />
         </div>
         <div>
-            <strong>@Model.Name</strong>            
+            <div>
+                <strong>@Model.Item1.Name</strong>
+                <span>@Model.Item2</span>
+            </div>                
             <p>
-                @Model.Description
+                @Model.Item1.Description
             </p>
         </div>
     </div>

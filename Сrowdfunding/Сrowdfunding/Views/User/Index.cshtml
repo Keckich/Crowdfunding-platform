@@ -3,7 +3,7 @@
 @{
 }
 <article>
-    <section class="user-info-wrapper">
+    <section class="info-wrapper">
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 img-container img-max-width img-container-border">
             <img class="unit-img" src="@Url.Content(Model.User.ImageUrl)" />
         </div>
@@ -61,7 +61,13 @@
             <h2>Achievements</h2>
             @foreach (var achievement in Model.Achievements)
             {
-                @await Html.PartialAsync("_AchievementPartial", achievement)
+                foreach (var achievementViewModel in Model.AchievementViewModel)
+                {
+                    if (achievement.Id == achievementViewModel.AchievementId)
+                    {
+                        @await Html.PartialAsync("_AchievementPartial", (achievement, achievementViewModel.Unlocked))
+                    }
+                }
             }
         </div>
     </section>

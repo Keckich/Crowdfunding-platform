@@ -46,7 +46,7 @@ namespace Сrowdfunding.Controllers
 
         public IActionResult Index()
         {
-            var campaigns = _context.Campaigns.ToList();
+            var campaigns = _context.Campaigns.OrderByDescending(x => x.Ratings.Select(r => r.Rate).Sum() / x.Ratings.Count).ToList();
             var indexVm = new IndexViewModel
             {
                 Campaigns = campaigns
@@ -58,7 +58,7 @@ namespace Сrowdfunding.Controllers
         [HttpGet]
         public IActionResult GetComments()
         {
-            var comments = _context.Comments.ToList();
+            var comments = _context.Comments.OrderByDescending(x => x.PostDate).ToList();
             bool isModer = this.User.IsInRole("Admin") || this.User.IsInRole("Moderator");
             var username = _userManager.GetUserName(this.User);
             var users = _userManager.Users.ToList();
@@ -70,7 +70,7 @@ namespace Сrowdfunding.Controllers
         {
             _logger.LogInformation(DateTime.Now.ToString("dd.MM.yyyy, HH:mm:ss"));
             var campaign = _context.Campaigns.Find(id);
-            if (campaign.EndTime < DateTime.Now || campaign.RemainSum == 0)
+            if (campaign.EndTime < DateTime.Now)
             {
                 campaign.Ended = true;
                 _context.SaveChanges();
@@ -111,7 +111,7 @@ namespace Сrowdfunding.Controllers
             var commentVm = new CommentViewModel
             {
                 Campaign = _context.Campaigns.Find(id),
-                Comments = _context.Comments.ToList(),
+                Comments = _context.Comments.OrderByDescending(x => x.PostDate).ToList(),
                 Rating = new Rating
                 {
                     CampaignId = id
@@ -215,14 +215,8 @@ namespace Сrowdfunding.Controllers
         {
             var campaign = _context.Campaigns.Find(id);
             var rew = _context.Rewards.Find(reward.RewardId);
-            if (campaign.RemainSum <= reward.Price)
-            {
-                campaign.RemainSum = 0;
-            }
-            else
-            {
-                campaign.RemainSum -= reward.Price;
-            }
+            campaign.RemainSum += reward.Price;
+
             if (rew.Count > 0)
             {
                 rew.Count--;
@@ -233,7 +227,25 @@ namespace Сrowdfunding.Controllers
                 Campaign = campaign,
                 Rewards = _context.Rewards.ToList()
             };
+
             return View(supportVm);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult SupportByMoney(int id, int sum)
+        {
+            var campaign = _context.Campaigns.Find(id);
+            campaign.RemainSum += sum;
+            _context.SaveChanges();
+
+            var supportVm = new SupportViewModel
+            {
+                Campaign = _context.Campaigns.Find(id),
+                Rewards = _context.Rewards.Where(x => x.CampaignId == id).ToList()
+            };
+
+            return View("Support", supportVm);
         }
 
         [HttpPost]

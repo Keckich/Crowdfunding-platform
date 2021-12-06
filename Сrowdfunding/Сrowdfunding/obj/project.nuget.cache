@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TmlzpRg4v20sCxn5TPA/umzhfOx18pg+xQneSL1Ljz8ii5eWJ+2ei10DPf7MCB8ZaG+uWoAhRx8hnyRUkk7q2w==",
+  "dgSpecHash": "vveDMSapgTwILq77lWSp1uG+dmSebMiyXGIiWZfXVTxHl5+Ofaw31Mwpco8gb7KthJA0CWckh/qhVZ3/48xCgQ==",
   "success": true,
   "projectFilePath": "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\cloudinarydotnet\\1.15.1\\cloudinarydotnet.1.15.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\google.api.gax.rest\\3.2.0\\google.api.gax.rest.3.2.0.nupkg.sha512",

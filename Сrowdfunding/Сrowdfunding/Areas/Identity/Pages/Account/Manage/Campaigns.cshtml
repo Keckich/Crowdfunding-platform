@@ -3,6 +3,7 @@
 @inject Сrowdfunding.Data.ApplicationDbContext context
 @{
 }
+
 <table class="table table-bordered table-striped ">
     <thead class="thead-dark">
         <tr>
@@ -42,13 +43,48 @@
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                     </form>
-                    <form method="post">
-                        <button asp-page-handler="delete" asp-route-id="@item.Id" id="btnDelete" class="btn bg-danger">
-                            <i class="fa fa-window-close-o" aria-hidden="true"></i>
-                        </button>
-                    </form>
+                    <button id="btnDeleteCampaign-@item.Id" type="button" class="btn bg-danger" data-toggle="modal" data-target="#deleteCampaignModal-@item.Id">
+                        <i class="fa fa-window-close-o" aria-hidden="true"></i>
+                    </button>
+                    <div id="deleteCampaignModal-@item.Id" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>Delete Campaign</h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Do you really want to delete "@item.Name" campaign? This action cannot be undone.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="post">
+                                        <button asp-page-handler="delete" asp-route-id="@item.Id" id="btnDeleteCampaign-@item.Id" class="btn bg-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                    <button id="hideModalDeleteBtn" type="button" class="btn bg-info" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnClickDelete").click(function () {
+            $("#deleteCampaign").modal("show");
+        });
+
+        $("#hideModalDeleteBtn").click(function () {
+            $("#deleteCampaign").modal("hide");
+        });
+    });
+</script>

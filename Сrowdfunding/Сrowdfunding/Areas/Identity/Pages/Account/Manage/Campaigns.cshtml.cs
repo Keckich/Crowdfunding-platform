@@ -53,12 +53,12 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
                 Campaigns = campaigns,
                 User = _userManager.GetUserAsync(User).Result
             };
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostDelete(int id)
         {
-
             _context.Campaigns.Remove(await _context.Campaigns.FindAsync(id));
             await _context.SaveChangesAsync();
             string author = _userManager.GetUserAsync(User).Result.UserName;
@@ -67,8 +67,8 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
                 Campaigns = _context.Campaigns.Where(p => p.Author == author).ToList()
             };
             StatusMessage = "Your post has been deleted.";
-            return RedirectToPage();
 
+            return RedirectToPage();
         }
     }
 }

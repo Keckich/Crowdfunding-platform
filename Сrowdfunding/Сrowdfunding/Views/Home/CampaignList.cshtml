@@ -3,5 +3,5 @@
 @model Сrowdfunding.Models.ViewModels.IndexViewModel
 @foreach (var campaign in Model.Campaigns)
 {
-    @await Html.PartialAsync("_CampaignPartial", campaign)
+    @await Html.PartialAsync("_CampaignPartial", (campaign, new Rating { CampaignId = campaign.Id}))
 }

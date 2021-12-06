@@ -47,9 +47,14 @@
     <Compile Remove="Data\Migrations\20211204230404_Achievement2.Designer.cs" />
     <Compile Remove="Data\Migrations\20211204230825_Achievement2.cs" />
     <Compile Remove="Data\Migrations\20211204230825_Achievement2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211205162146_UserTest.cs" />
+    <Compile Remove="Data\Migrations\20211205162146_UserTest.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211205162558_UserTest.cs" />
+    <Compile Remove="Data\Migrations\20211205162558_UserTest.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.15.1" />
     <PackageReference Include="Google.Cloud.Storage.V1" Version="3.4.0" />
     <PackageReference Include="jQuery.Ajax.Unobtrusive" Version="2.0.20710" />

@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace Сrowdfunding.Models.ViewModels
 {
-    public class UserInfoViewModel
+    public class AchievementListViewModel
     {
-        public List<Campaign> Campaigns { get; set; }
         public List<Achievement> Achievements { get; set; }
-        public ApplicationUser User { get; set; }
-        public List<AchievementViewModel> AchievementViewModel { get; set; }
-
+        public List<AchievementViewModel> AchievementViews { get; set; }
     }
 }

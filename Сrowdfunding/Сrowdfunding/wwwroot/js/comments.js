@@ -1,5 +1,6 @@
 ﻿const LoadCommData = () => {
     var commentBlock = '';
+    var defaultImgUrl = "https://res.cloudinary.com/dwivxsl5s/image/upload/v1638642467/defaultuser_kr3x61.png";
     let id = window.location.pathname.split('/').pop();
     $.ajax({
         url: '/Home/GetComments',
@@ -14,11 +15,13 @@
                                             <div class="row justify-content-between">
                                                 <div style="display: inline-flex">
                                                     <div class="nav-item" style="margin-left: 10px">
-                                                        <img id="com-${v.commentId}-profile-img" style="width:40px;height:40px; object-fit:cover; border-radius:30px">
+                                                        <img id="com-${v.commentId}-profile-img" class="profile-icon">
                                                     </div>
                                                     <div>
                                                         <time>${date}</time>
-                                                        <p>${v.author}</p>
+                                                        <p>
+                                                            <a id="com-${v.commentId}-author">${v.author}</a>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <form id="del-com-${v.commentId}-form" method="post" action="/Home/DeleteComment"
@@ -56,18 +59,28 @@
             let delBtn = `<button class="delete-btn">
                             <i class="fa fa-times" aria-hidden="true"></i>
                           </button>`;
-            $("#comments").html(commentBlock);  
+            $("#comments").html(commentBlock); 
+            var names = []
+            $.each(result.users, (q, user) => {
+                names.push(user.userName)
+            })
             $.each(comments, (k, comment) => {
                 if (comment.campaignId == id) {
                     if (result.username == comment.author || result.isModer) {
                         $(`#del-com-${comment.commentId}-form`).append(delBtn);
                     }
+                    var names = []
                     $.each(result.users, (q, user) => {
-                        console.log(comment)
+                        names.push(user.userName)
                         if (user.userName == comment.author) {
                             $(`#com-${comment.commentId}-profile-img`).attr("src", user.imageUrl);
-                        }
+                            $(`#com-${comment.commentId}-author`).attr("href", '/User/Index/' + user.id)
+                        }                        
                     })
+                    if (!names.includes(comment.author)) {
+                        $(`#com-${comment.commentId}-profile-img`).attr("src", defaultImgUrl);
+                    }
+                    console.log(names)
                 }
             });            
         },

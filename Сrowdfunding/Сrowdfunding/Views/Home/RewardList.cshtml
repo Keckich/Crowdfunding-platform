@@ -1,6 +1,13 @@
 ﻿@model Сrowdfunding.Models.ViewModels.SupportViewModel
 @{
 }
+<form method="post" asp-controller="Home" asp-action="SupportByMoney" asp-route-id="@Model.Campaign.Id">
+    <div class="form-group">
+        <label>Price($):</label>
+        <input type="number" class="form-control" name="Sum" />
+    </div>
+    <input type="submit" value="Submit" />
+</form>
 @foreach (var reward in Model.Rewards)
 {
     if (reward.CampaignId == Model.Campaign.Id)

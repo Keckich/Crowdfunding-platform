@@ -21,6 +21,7 @@ using Newtonsoft.Json.Linq;
 using Сrowdfunding.CloudStorage;
 using Сrowdfunding.Models;
 using Сrowdfunding.Hubs;
+using AspNetCoreHero.ToastNotification;
 
 namespace Сrowdfunding
 {
@@ -52,6 +53,12 @@ namespace Сrowdfunding
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+            });
+            services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 7;
+                config.IsDismissable = true;
+                config.Position = NotyfPosition.BottomRight;
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -91,7 +98,11 @@ namespace Сrowdfunding
                     name: "support",
                     pattern: "Home/Details/{id}/Support",
                     defaults: new { controller = "Home", action = "Support" });
-                
+                endpoints.MapControllerRoute(
+                    name: "support",
+                    pattern: "Home/Details/{id}/Support",
+                    defaults: new { controller = "Home", action = "SupportByMoney" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

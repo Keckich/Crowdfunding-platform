@@ -30,12 +30,13 @@ namespace Сrowdfunding.Controllers
         public IActionResult Index(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;
-            var achievements = _context.UserAchievements.Where(x => x.UserId == user.Id).Select(x => x.AchievementId).ToList();
+            var achievementIds = _context.UserAchievements.Where(x => x.UserId == user.Id).Select(x => new AchievementViewModel { AchievementId = x.AchievementId, Unlocked = x.GetDate}).ToList();
 
-            var userInfoViewModel = new UserInfoViewModel{
+            var userInfoViewModel = new UserInfoViewModel {
                 User = user,
                 Campaigns = _context.Campaigns.Where(x => x.UserId == user.Id).ToList(),
-                Achievements = _context.Achievements.Where(x => achievements.Contains(x.Id)).ToList()
+                Achievements = _context.Achievements.Where(x => achievementIds.Select(x => x.AchievementId).Contains(x.Id)).ToList(),
+                AchievementViewModel = achievementIds
             };
 
             return View(userInfoViewModel);

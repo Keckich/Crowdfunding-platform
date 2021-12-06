@@ -37,9 +37,9 @@ namespace Сrowdfunding.Data
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Likes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Comment>().HasMany(comm => comm.Dislikes).WithOne(like => like.Comment).HasForeignKey(like => like.CommentId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<UserAchievementsModel>().HasKey(ua => new { ua.UserId, ua.AchievementId });
-            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.Achievement).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.AchievementId);
-            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.User).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.UserId);
-            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Campaigns).WithOne(c => c.User).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.Achievement).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.AchievementId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<UserAchievementsModel>().HasOne(ua => ua.User).WithMany(a => a.UserAchievements).HasForeignKey(ua => ua.UserId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Campaigns).WithOne(c => c.User).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

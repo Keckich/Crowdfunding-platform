@@ -1428,3 +1428,7 @@ D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\D
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AchievementPartial.cshtml.g.cs
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\AspNetCoreHero.ToastNotification.Views.dll
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\AspNetCoreHero.ToastNotification.dll
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Users.cshtml.g.cs
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RatingStaticPartial.cshtml.g.cs

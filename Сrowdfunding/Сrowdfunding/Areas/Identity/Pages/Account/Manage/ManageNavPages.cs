@@ -26,6 +26,8 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
 
         public static string Campaigns => "Campaigns";
 
+        public static string Users => "Users";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
@@ -43,6 +45,8 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         public static string CampaignsNavClass(ViewContext viewContext) => PageNavClass(viewContext, Campaigns);
+
+        public static string UsersNavClass(ViewContext viewContext) => PageNavClass(viewContext, Users);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {

@@ -1,9 +1,4 @@
-﻿.user-info-wrapper {
-    display: flex;
-    flex-direction: row;
-}
-
-.achievement-wrapper {
+﻿.achievement-wrapper {
     background-color: wheat;
     border-radius: 8px;
     padding-top: 10px;

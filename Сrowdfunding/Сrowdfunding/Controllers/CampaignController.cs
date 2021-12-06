@@ -1,4 +1,5 @@
-﻿using CloudinaryDotNet;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,16 +21,23 @@ namespace Сrowdfunding.Controllers
     public class CampaignController : Controller
     {
         private readonly ILogger<CampaignController> _logger;
+        private readonly INotyfService _notyfService;
         private ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
         private ICloudStorage _cloudStorage;
 
-        public CampaignController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICloudStorage cloudStorage, ILogger<CampaignController> logger)
+        public CampaignController(
+            ApplicationDbContext context, 
+            UserManager<ApplicationUser> userManager, 
+            ICloudStorage cloudStorage, 
+            ILogger<CampaignController> logger,
+            INotyfService notyfService)
         {
             _context = context;
             _userManager = userManager;
             _cloudStorage = cloudStorage;
             _logger = logger;
+            _notyfService = notyfService;
         }
 
         [Authorize]
@@ -65,23 +73,11 @@ namespace Сrowdfunding.Controllers
                 campaign.Author = _userManager.GetUserName(this.User);
                 campaign.UserId = _userManager.GetUserId(this.User);
                 campaign.BeginTime = DateTime.Now;
-                campaign.RemainSum = campaign.TotalSum;
+                campaign.RemainSum = 0;
                 var achieve = new UserAchievementsModel
                 {
                     UserId = _userManager.GetUserId(this.User),
                     AchievementId = _context.Achievements.Where(x => x.Name == "That's only the beginning!").First().Id,
-                    GetDate = DateTime.Now
-                };
-                var achieve2 = new UserAchievementsModel
-                {
-                    UserId = _userManager.GetUserId(this.User),
-                    AchievementId = _context.Achievements.Where(x => x.Name == "Good start").First().Id,
-                    GetDate = DateTime.Now
-                };
-                var achieve3 = new UserAchievementsModel
-                {
-                    UserId = _userManager.GetUserId(this.User),
-                    AchievementId = _context.Achievements.Where(x => x.Name == "It could be worse...").First().Id,
                     GetDate = DateTime.Now
                 };
                 var campaignsCurrentUserCount = _context.Campaigns.Where(x => x.Author == campaign.Author).Count();
@@ -89,8 +85,7 @@ namespace Сrowdfunding.Controllers
                 if (!isUserHasAcvhieve && campaignsCurrentUserCount < 1)
                 {
                     _context.UserAchievements.Add(achieve);
-                    _context.UserAchievements.Add(achieve2);
-                    _context.UserAchievements.Add(achieve3);
+                    _notyfService.Success("You got new achievement!");
                 }
                 _context.Campaigns.Add(campaign);
                 _context.SaveChanges();

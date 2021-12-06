@@ -1,26 +1,26 @@
-﻿@model Сrowdfunding.Models.Campaign
+﻿@model (Сrowdfunding.Models.Campaign, Сrowdfunding.Models.Rating)
 @{
 }
-<section class="col-12 col-md-6 col-lg-4 text-center single-unit">
+<section class="col-12 col-md-6 col-lg-3 text-center single-unit">
     <div class="inside-container">
         <div class="unit-index-img">
-            <img height="150" src="@Url.Content(Model.ImageUrl)" />
+            <img height="150" src="@Url.Content(Model.Item1.ImageUrl)" />
         </div>
         <div class="text-left">
             <b>
-                <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.Id">
-                    @Model.Name
-                </a>                
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@Model.Item1.Id">
+                    @Model.Item1.Name
+                </a>
             </b>
+            <div id="rate-form">
+                @await Html.PartialAsync("_RatingStaticPartial", @Model.Item2)
+            </div>
             <p>
-                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.UserId">
-                    @Model.Author
-                </a>                
+                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Item1.UserId">
+                    @Model.Item1.Author
+                </a>
             </p>
-            <div>Goal: @Model.TotalSum$</div>
-            <div>Remain: @Model.RemainSum$</div>
-            <div>Start: @Model.BeginTime</div>
-            <div>End: @Model.EndTime</div>
+            <p>Goal: @Model.Item1.RemainSum / @Model.Item1.TotalSum$</p>
         </div>
     </div>
 </section>

@@ -1,0 +1,46 @@
+﻿@using Сrowdfunding.Data
+@model Rating
+@inject ApplicationDbContext _context
+@{
+    var rateList = _context.Ratings.Where(r => r.CampaignId == Model.CampaignId).ToList();
+    int rateCount = rateList.Count;
+    int rateResult = 0;
+    foreach (var mark in rateList)
+    {
+        rateResult += mark.Rate;
+    }
+    if (rateCount > 0) rateResult /= rateCount;
+}
+
+
+<div class="rating-area review-label" style="justify-content: flex-end">
+    @if (rateResult >= 4.5)
+    {
+        <input type="radio" checked />
+    }
+    <label class="star-icon" for="star-5"></label>
+
+    @if (rateResult >= 3.5 && rateResult < 4.5)
+    {
+        <input type="radio" checked />
+    }
+    <label class="star-icon" for="star-4"></label>
+
+    @if (rateResult >= 2.5 && rateResult < 3.5)
+    {
+        <input type="radio" checked />
+    }
+    <label class="star-icon" for="star-3"></label>
+
+    @if (rateResult >= 1.5 && rateResult < 2.5)
+    {
+        <input type="radio" checked />
+    }
+    <label class="star-icon" for="star-2"></label>
+
+    @if (rateResult >= 0.5 && rateResult < 1.5)
+    {
+        <input type="radio" checked />
+    }
+    <label class="star-icon" for="star-1"></label>
+</div>
