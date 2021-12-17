@@ -85,7 +85,7 @@
             });            
         },
         error: (error) => {
-            console.log('Error:' + error);
+            console.log(error);
         }
     });
 }

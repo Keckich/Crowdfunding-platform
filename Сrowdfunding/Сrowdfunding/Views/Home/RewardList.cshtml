@@ -1,6 +1,10 @@
 ﻿@model Сrowdfunding.Models.ViewModels.SupportViewModel
 @{
 }
+@if (Model.Rewards.Count < 1)
+{
+    <p>This campaign doesn't have an awailable rewards, but you can suppot authors just by sending them some money.</p>
+}
 <form method="post" asp-controller="Home" asp-action="SupportByMoney" asp-route-id="@Model.Campaign.Id">
     <div class="form-group">
         <label>Price($):</label>

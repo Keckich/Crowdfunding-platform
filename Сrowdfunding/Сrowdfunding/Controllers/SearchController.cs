@@ -24,18 +24,23 @@ namespace Сrowdfunding.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
         public IActionResult Search(string searchString)
         {
-            var campaigns = _context.Campaigns.Where(c => c.Name.Contains(searchString)
+            var campaigns = _context.Campaigns
+                .Where(c => c.Name.Contains(searchString)
                                                     || c.ShortDescription.Contains(searchString)
                                                     || c.Story.Contains(searchString)
                                                     || c.Comments.Where(com => com.Content.Contains(searchString)).Any()
-                                                    || c.News.Where(n => n.NewsContent.Contains(searchString)).Any()).ToList();
+                                                    || c.News.Where(n => n.NewsContent.Contains(searchString)).Any())
+                .OrderByDescending(x => x.Ratings.Select(r => r.Rate).Sum() / x.Ratings.Count)
+                .ToList();
             var searchViewModel = new SearchViewModel
             {
                 Campaigns = campaigns,

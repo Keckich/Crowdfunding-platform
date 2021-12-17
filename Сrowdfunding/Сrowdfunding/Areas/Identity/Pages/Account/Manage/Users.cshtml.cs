@@ -39,7 +39,7 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
             List<ApplicationUser> users = new List<ApplicationUser>();
             if (this.User.IsInRole("Admin"))
             {
-                users = _userManager.Users.ToList();
+                users = _userManager.Users.Where(x => x.Id != _userManager.GetUserAsync(this.User).Result.Id).ToList();
             }
             InUser = new InputUser
             {

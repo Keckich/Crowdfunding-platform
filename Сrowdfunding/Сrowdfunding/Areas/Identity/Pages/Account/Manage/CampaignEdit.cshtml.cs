@@ -49,7 +49,6 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
 
         public IActionResult OnPost(Campaign campaign)
         {
-
             var _campaign = _context.Campaigns.Find(campaign.Id);
             _campaign.Category = campaign.Category;
             _campaign.CategoryId = campaign.CategoryId;
@@ -58,7 +57,6 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account.Manage
             _campaign.Story = campaign.Story;
             _context.SaveChanges();
             return RedirectToPage("Campaigns");
-
         }
     }
 }

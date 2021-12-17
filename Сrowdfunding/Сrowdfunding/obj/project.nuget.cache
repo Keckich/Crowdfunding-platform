@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vveDMSapgTwILq77lWSp1uG+dmSebMiyXGIiWZfXVTxHl5+Ofaw31Mwpco8gb7KthJA0CWckh/qhVZ3/48xCgQ==",
+  "dgSpecHash": "u51LbmDt3ErjOEovPCKyzh0fNbw0YQ4BZtyvL0xOsnDaTS5ovNYX0ppm/VBW6HmxRrgFAGFnYlFTPSN8JjBBew==",
   "success": true,
   "projectFilePath": "D:\\1Project-crowdfunding\\Crowdfunding-platform\\Сrowdfunding\\Сrowdfunding\\Сrowdfunding.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,8 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.21\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.21.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.21\\microsoft.aspnetcore.identity.ui.3.1.21.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.2\\microsoft.aspnetcore.jsonpatch.3.1.2.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.2\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.2.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\3.1.8\\microsoft.aspnetcore.mvc.razor.extensions.3.1.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\3.1.8\\microsoft.aspnetcore.mvc.razor.runtimecompilation.3.1.8.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
@@ -88,6 +90,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\moment.js\\2.29.1\\moment.js.2.29.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

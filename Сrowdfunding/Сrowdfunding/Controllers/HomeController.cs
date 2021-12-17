@@ -15,12 +15,14 @@ using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace Сrowdfunding.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly INotyfService _notyfService;
         private ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
         private readonly IHubContext<CommentHub> _commentHub;
@@ -70,9 +72,35 @@ namespace Сrowdfunding.Controllers
         {
             _logger.LogInformation(DateTime.Now.ToString("dd.MM.yyyy, HH:mm:ss"));
             var campaign = _context.Campaigns.Find(id);
+            var achieveGood = new UserAchievementsModel
+            {
+                UserId = _userManager.GetUserId(this.User),
+                AchievementId = _context.Achievements.Where(x => x.Name == "Good start").First().Id,
+                GetDate = DateTime.Now
+            };
+            var achieveSad = new UserAchievementsModel
+            {
+                UserId = _userManager.GetUserId(this.User),
+                AchievementId = _context.Achievements.Where(x => x.Name == "It could be worse...").First().Id,
+                GetDate = DateTime.Now
+            };
+            var isUserHasAcvhieveGood = _context.UserAchievements.Where(x => x.UserId == achieveGood.UserId && x.AchievementId == achieveGood.AchievementId).Any();
+            var isUserHasAcvhieveSad = _context.UserAchievements.Where(x => x.UserId == achieveSad.UserId && x.AchievementId == achieveSad.AchievementId).Any();
+            
             if (campaign.EndTime < DateTime.Now)
             {
                 campaign.Ended = true;
+                var isGoodEnd = campaign.RemainSum >= campaign.TotalSum;
+                if (!isUserHasAcvhieveGood && isGoodEnd)
+                {                    
+                    _context.UserAchievements.Add(achieveGood);
+                    _notyfService.Success("You got new achievement!");
+                }
+                else if (!isUserHasAcvhieveSad && !isGoodEnd)
+                {
+                    _context.UserAchievements.Add(achieveSad);
+                    _notyfService.Success("You got new achievement!");
+                }
                 _context.SaveChanges();
             } 
             var commentVm = new CommentViewModel
@@ -95,13 +123,15 @@ namespace Сrowdfunding.Controllers
             {
                 _logger.LogError("IN DETAILS");
                 var username = _userManager.GetUserName(this.User);
+                var userId = _userManager.GetUserId(this.User);
                 comment.PostDate = DateTime.Now;
                 comment.Author = username;
+                comment.UserId = userId;
                 _logger.LogInformation(comment.CampaignId.ToString());
                 _context.Add(comment);
                 _context.SaveChanges();
                 await _commentHub.Clients.All.SendAsync("LoadComments");
-                return RedirectToAction("CommentList", new { id = id });
+                return RedirectToAction("CommentList", new { id = comment.CampaignId });
             }
             return View();
         }
@@ -131,9 +161,9 @@ namespace Сrowdfunding.Controllers
 
         public async Task<IActionResult> AddNewsAsync(News news)
         {
-            var username = _userManager.GetUserName(this.User);
-            news.Author = username;
+            news.Author = _userManager.GetUserName(this.User);
             news.PostDate = DateTime.Now;
+            news.UserId = _userManager.GetUserId(this.User);
             _context.Add(news);
             _context.SaveChanges();
             await _newsHub.Clients.All.SendAsync("LoadNews");
@@ -194,7 +224,8 @@ namespace Сrowdfunding.Controllers
                     Username = username
                 }
             };
-            return View("Details", commentVm);
+
+            return RedirectToActionPermanent("Details", "Home", new { id = reward.CampaignId });
         }
 
         [HttpGet]
@@ -233,6 +264,7 @@ namespace Сrowdfunding.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("Home/Support")]
         public IActionResult SupportByMoney(int id, int sum)
         {
             var campaign = _context.Campaigns.Find(id);
@@ -310,11 +342,13 @@ namespace Сrowdfunding.Controllers
         {
             _logger.LogError("like:" + comment.CommentId.ToString() + "; " + comment.CampaignId.ToString());
             var username = _userManager.GetUserName(this.User);
+            var userId = _userManager.GetUserId(this.User);
             var dbComment = _context.Comments.Find(comment.CommentId);
             var newLike = new Like
             {
                 CommentId = comment.CommentId,
-                Username = username
+                Username = username,
+                UserId = userId
             };
             if (CheckLikes(comment, username))
             {
@@ -337,11 +371,13 @@ namespace Сrowdfunding.Controllers
         public IActionResult Dislike(Comment comment)
         {
             var username = _userManager.GetUserName(this.User);
+            var userId = _userManager.GetUserId(this.User);
             var dbComment = _context.Comments.Find(comment.CommentId);
             var newDislike = new Dislike
             {
                 CommentId = comment.CommentId,
-                Username = username
+                Username = username,
+                UserId = userId
             };
             if (CheckDislikes(comment, username))
             {

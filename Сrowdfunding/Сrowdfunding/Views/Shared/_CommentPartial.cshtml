@@ -32,7 +32,7 @@
             }
         </div>
 
-        @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Author)
+        @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.UserName == Model.Author)
         {
             <form method="post" asp-action="DeleteComment" asp-controller="Home"
                   data-ajax="true" data-ajax-mode="replace" data-ajax-update="#commentSection" enctype="multipart/form-data">

@@ -15,5 +15,10 @@ namespace Сrowdfunding.Models
         public string ImageUrl { get; set; } = "https://res.cloudinary.com/dwivxsl5s/image/upload/v1638642467/defaultuser_kr3x61.png";
         [NotMapped]
         public virtual IFormFile ImageFile { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Like> Likes { get; set; }
+        public ICollection<Dislike> Dislikes { get; set; }
+        public ICollection<News> News { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

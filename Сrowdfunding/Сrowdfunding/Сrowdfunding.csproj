@@ -51,6 +51,8 @@
     <Compile Remove="Data\Migrations\20211205162146_UserTest.Designer.cs" />
     <Compile Remove="Data\Migrations\20211205162558_UserTest.cs" />
     <Compile Remove="Data\Migrations\20211205162558_UserTest.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211207162607_User7.cs" />
+    <Compile Remove="Data\Migrations\20211207162607_User7.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +66,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
       <PrivateAssets>all</PrivateAssets>

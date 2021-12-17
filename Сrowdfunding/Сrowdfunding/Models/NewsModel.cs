@@ -13,6 +13,8 @@ namespace Сrowdfunding.Models
         public string Author { get; set; }
         public DateTime PostDate { get; set; }
         public int CampaignId { get; set; }
+        public string UserId { get; set; }
         public Campaign Campaign { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

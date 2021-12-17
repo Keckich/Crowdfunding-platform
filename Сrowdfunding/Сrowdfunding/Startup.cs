@@ -37,6 +37,7 @@ namespace Сrowdfunding
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
@@ -93,13 +94,13 @@ namespace Сrowdfunding
                 endpoints.MapControllerRoute(
                     name: "reward",
                     pattern: "Home/Details/{id}/AddRewards",
-                    defaults: new { controller = "Home", action = "Rewards"});
+                    defaults: new { controller = "Home", action = "Rewards" });
                 endpoints.MapControllerRoute(
                     name: "support",
                     pattern: "Home/Details/{id}/Support",
                     defaults: new { controller = "Home", action = "Support" });
                 endpoints.MapControllerRoute(
-                    name: "support",
+                    name: "supportbymoney",
                     pattern: "Home/Details/{id}/Support",
                     defaults: new { controller = "Home", action = "SupportByMoney" });
 

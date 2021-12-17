@@ -1432,3 +1432,6 @@ D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\D
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\AspNetCoreHero.ToastNotification.dll
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Users.cshtml.g.cs
 D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RatingStaticPartial.cshtml.g.cs
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\1Project-crowdfunding\Crowdfunding-platform\Сrowdfunding\Сrowdfunding\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

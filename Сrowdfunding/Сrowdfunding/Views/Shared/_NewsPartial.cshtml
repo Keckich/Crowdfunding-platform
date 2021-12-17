@@ -7,7 +7,11 @@
     <div class="row justify-content-between">
         <div>
             <time>@Model.PostDate</time>
-            <p>@Model.Author</p>
+            <p>
+                <a asp-controller="User" asp-action="Index" asp-route-id="@UserManager.FindByNameAsync(Model.Author).Result.Id">
+                    @Model.Author
+                </a>
+            </p>
         </div>
         @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || UserManager.GetUserAsync(User).Result.Email == Model.Author)
         {

@@ -1,5 +1,7 @@
 ﻿@model (Сrowdfunding.Models.Campaign, Сrowdfunding.Models.Rating)
+@inject Сrowdfunding.Data.ApplicationDbContext context
 @{
+    var category = context.Categories.FindAsync(Model.Item1.CategoryId).Result.Name;
 }
 <section class="col-12 col-md-6 col-lg-3 text-center single-unit">
     <div class="inside-container">
@@ -12,6 +14,7 @@
                     @Model.Item1.Name
                 </a>
             </b>
+            <p>Category: @category</p>
             <div id="rate-form">
                 @await Html.PartialAsync("_RatingStaticPartial", @Model.Item2)
             </div>

@@ -1,13 +1,6 @@
 ﻿@model Сrowdfunding.Models.ViewModels.SupportViewModel
 @{
 }
-@if (Model.Rewards.Count < 1)
-{
-    <p>This campaign doesn't have an awailable rewards, but you can suppot authors just by sending them some money.</p>
-}
-else
-{
-    <section>
-        @await Html.PartialAsync("~/Views/Home/RewardList.cshtml", Model)
-    </section>
-}
+<section>
+    @await Html.PartialAsync("~/Views/Home/RewardList.cshtml", Model)
+</section>

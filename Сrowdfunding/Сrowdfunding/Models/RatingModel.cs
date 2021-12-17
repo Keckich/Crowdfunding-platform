@@ -14,6 +14,8 @@ namespace Сrowdfunding.Models
         public int Rate { get; set; } = 0;
         public int CampaignId { get; set; }
         public string Username { get; set; }
+        public string UserId { get; set; }
         public Campaign Campaign { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
