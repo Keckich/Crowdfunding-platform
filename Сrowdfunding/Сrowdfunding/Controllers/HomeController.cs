@@ -89,7 +89,7 @@ namespace Сrowdfunding.Controllers
             var isUserHasAcvhieveGood = _context.UserAchievements.Where(x => x.UserId == achieveGood.UserId && x.AchievementId == achieveGood.AchievementId).Any();
             var isUserHasAcvhieveSad = _context.UserAchievements.Where(x => x.UserId == achieveSad.UserId && x.AchievementId == achieveSad.AchievementId).Any();
             
-            if (campaign.EndTime < DateTime.Now)
+            if (_userManager.GetUserId(this.User) != null && campaign.EndTime < DateTime.Now)
             {
                 campaign.Ended = true;
                 var isGoodEnd = campaign.RemainSum >= campaign.TotalSum;

@@ -49,6 +49,7 @@ namespace Сrowdfunding.Controllers
                 Campaign = new Campaign(),
                 Categories = _context.Categories.ToList()
             };
+            
             return View(createVm);
         }
 
