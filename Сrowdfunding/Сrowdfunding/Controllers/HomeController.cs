@@ -35,7 +35,8 @@ namespace Сrowdfunding.Controllers
             UserManager<ApplicationUser> userManager, 
             IHubContext<CommentHub> commentHub, 
             IHubContext<NewsHub> newsHub,
-            ICloudStorage cloudStorage)
+            ICloudStorage cloudStorage,
+            INotyfService notyfService)
         {
             _logger = logger;
             _context = context;
@@ -43,6 +44,7 @@ namespace Сrowdfunding.Controllers
             _commentHub = commentHub;
             _newsHub = newsHub;
             _cloudStorage = cloudStorage;
+            _notyfService = notyfService;
         }
 
 

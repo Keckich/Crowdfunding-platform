@@ -98,8 +98,16 @@ namespace Сrowdfunding.Areas.Identity.Pages.Account
                     /*await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
                     EmailService emailService = new EmailService();
-                    await emailService.SendEmailAsync(user.Email, "Email-Подтверждение", $"Здравствуйте, {user.UserName}! Подтвердите электронную. Так мы сможем" +
+                    try
+                    {
+                        await emailService.SendEmailAsync(user.Email, "Email-Подтверждение", $"Здравствуйте, {user.UserName}! Подтвердите электронную. Так мы сможем" +
                         $" понять, что вы ввели верную почту, и вы сразу сможете войти в свой аккаунт.\n<a href='{callbackUrl}'>Подвердите электронную почту.</a>");
+                    }
+                    catch
+                    {
+                        return Page();
+                    }
+                    
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
