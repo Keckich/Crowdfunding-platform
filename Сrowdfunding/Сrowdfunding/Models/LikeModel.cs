@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Сrowdfunding.Models
+﻿namespace Сrowdfunding.Models
 {
     public class Like
     {

@@ -93,7 +93,7 @@ namespace Сrowdfunding.Controllers
             {
                 campaign.Ended = true;
                 var isGoodEnd = campaign.RemainSum >= campaign.TotalSum;
-                if (!isUserHasAcvhieveGood && isGoodEnd)
+                if (!isUserHasAcvhieveGood && isGoodEnd && campaign.Author == _userManager.GetUserName(this.User))
                 {                    
                     _context.UserAchievements.Add(achieveGood);
                     _notyfService.Success("You got new achievement!");
@@ -295,6 +295,7 @@ namespace Сrowdfunding.Controllers
                 _context.Add(rating);
                 _context.SaveChanges();
             }
+
             return RedirectToAction("_RatingPartial", new { id = rating.RateId });
         }
 

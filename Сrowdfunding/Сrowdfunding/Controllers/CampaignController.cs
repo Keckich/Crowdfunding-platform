@@ -1,14 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Сrowdfunding.CloudStorage;
@@ -91,6 +86,7 @@ namespace Сrowdfunding.Controllers
                 _context.Campaigns.Add(campaign);
                 _context.SaveChanges();
             }
+
             return RedirectPermanent("~/Home/Index");
         }
     }

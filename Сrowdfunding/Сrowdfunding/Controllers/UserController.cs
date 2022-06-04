@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Сrowdfunding.Data;
 using Сrowdfunding.Models;
 using Сrowdfunding.Models.ViewModels;

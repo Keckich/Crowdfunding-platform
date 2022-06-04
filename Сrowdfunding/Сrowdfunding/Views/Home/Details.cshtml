@@ -12,11 +12,9 @@
             <div id="detail-title" class="row justify-content-between">
                 <h2>@Model.Campaign.Name</h2>
                 <div id="rate-form">
-                    @await Html.PartialAsync("_RatingPartial", Model.Rating)                   
-
+                    @await Html.PartialAsync("_RatingPartial", Model.Rating)
                 </div>
             </div>
-
 
             <p style="word-wrap: break-word">@Model.Campaign.ShortDescription</p>
             <div>

@@ -32,12 +32,13 @@ namespace Сrowdfunding.Controllers
             var userRolesVm = new List<RoleViewModel>();
             foreach (var user in users)
             {
-                var thisVm = new RoleViewModel();
-                thisVm.UserId = user.Id;
-                thisVm.Email = user.Email;
-                thisVm.Roles = await GetUserRoles(user);
-                userRolesVm.Add(thisVm);
+                var roleVm = new RoleViewModel();
+                roleVm.UserId = user.Id;
+                roleVm.Email = user.Email;
+                roleVm.Roles = await GetUserRoles(user);
+                userRolesVm.Add(roleVm);
             }
+
             return View(userRolesVm);
         }
 
@@ -69,6 +70,7 @@ namespace Сrowdfunding.Controllers
                 };
                 model.Add(manageVm);
             }
+
             return View(model);
         }
 
@@ -93,6 +95,7 @@ namespace Сrowdfunding.Controllers
                 ModelState.AddModelError("", "Cannot remove user existing roles");
                 return View(model);
             }
+
             return RedirectToAction("Index");
         }
     }

@@ -13,8 +13,10 @@
 
 @if (Model?.Campaigns != null && !string.IsNullOrEmpty(Model.SearchString))
 {
-    @foreach (var campaign in Model.Campaigns)
-    {
-        @await Html.PartialAsync("_CampaignPartial", (campaign, new Rating { CampaignId = campaign.Id }))
-    }
+    <article class="row">
+        @foreach (var campaign in Model.Campaigns)
+        {
+            @await Html.PartialAsync("_CampaignPartial", (campaign, new Rating { CampaignId = campaign.Id }))
+        }
+    </article>    
 }
